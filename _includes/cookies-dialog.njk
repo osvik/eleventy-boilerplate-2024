@@ -70,8 +70,8 @@
 				<p>{{ cookies.first_dialog.line_1 | safe }}</p>
 				<p>{{ cookies.first_dialog.line_2 | safe }}</p>
 				<div class="modal-bt-row">
-					<button class="popup-yes" id="butyes" x-on:click="accept(); $dispatch('cookies:accept');">{{ cookies.first_dialog.button_accept }}</button>
-					<button class="popup-no" x-on:click="configure(); $dispatch('cookies:config');">{{ cookies.first_dialog.button_configure }}</button>
+					<button class="cookies-yes" id="butyes" x-on:click="accept(); $dispatch('cookies:accept');">{{ cookies.first_dialog.button_accept }}</button>
+					<button class="cookies-no" x-on:click="configure(); $dispatch('cookies:config');">{{ cookies.first_dialog.button_configure }}</button>
 				</div>
 			</div>
 
@@ -79,8 +79,8 @@
 				<h2>{{ cookies.second_dialog.header }}</h2>
 				<p>{{ cookies.second_dialog.line | safe }}</p>
                 <div class="modal-bt-row">
-					<button class="popup-yes" x-on:click="acceptAll(); $dispatch('cookies:acceptall');">{{ cookies.second_dialog.button_accept_all }}</button>
-					<button class="popup-no" x-on:click="refuseAll(); $dispatch('cookies:denytall');">{{ cookies.second_dialog.button_reject_all }}</button>
+					<button class="cookies-yes" x-on:click="acceptAll(); $dispatch('cookies:acceptall');">{{ cookies.second_dialog.button_accept_all }}</button>
+					<button class="cookies-no" x-on:click="refuseAll(); $dispatch('cookies:denytall');">{{ cookies.second_dialog.button_reject_all }}</button>
 				</div>
                 <form>
                     <div>
@@ -112,7 +112,7 @@
                         <p>{{ cookies.second_dialog.desc_cookiesMandatory }}</p>
                     </div>
                     <div class="modal-bt-row">
-					    <button type="button" class="popup-yes" x-on:click="okSelected(); $dispatch('cookies:ok')"> &nbsp; {{ cookies.second_dialog.ok_button }} &nbsp; </button>
+					    <button type="button" class="cookies-yes" x-on:click="okSelected(); $dispatch('cookies:ok')"> &nbsp; {{ cookies.second_dialog.ok_button }} &nbsp; </button>
 				    </div>
                 </form>
 			</div>
