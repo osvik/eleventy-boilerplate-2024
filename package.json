@@ -1,0 +1,23 @@
+{
+  "name": "eleventy-2024",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:github": "cross-env MY_ENVIRONMENT=github npx @11ty/eleventy",
+    "build:prod": "cross-env MY_ENVIRONMENT=prod npx @11ty/eleventy",
+    "server": "cross-env MY_ENVIRONMENT=development npx @11ty/eleventy --serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.9.0"
+  }
+}
