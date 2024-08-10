@@ -28,6 +28,7 @@ module.exports = function () {
 		basedomain: basedomainVal,
 		assets: assetsVal,
 		isDev: development,
-		version: "0.5"
+		version: "0.5",
+		googleTagManager: "WJL33446"
 	};
 };
