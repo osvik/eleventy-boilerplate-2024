@@ -1,18 +1,5 @@
 /* jshint esversion:6 */
 
-/* CALENDAR FUNCIONS */
-
-const now = new Date();
-
-/**
- * Uppercase first char
- * @param {string} sentence 
- * @returns {string}
- */
-const uSentence = function (sentence) {
-    return sentence.charAt(0).toUpperCase() + sentence.slice(1);
-};
-
 /**
  * Not function for Alpine
  * @param {boolean} value 

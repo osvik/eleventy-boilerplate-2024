@@ -5,123 +5,7 @@
         "Descripción calendario de frutas y legumbres de temporada"
     ],
     "privacy_policy_url": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
-    "menu": {
-        "home": "¿Por qué?",
-        "calendar": "Calendario",
-        "download": "Descargar",
-        "languages": "Idiomas"
-    },
-    "recipesMenu": {
-        "home": "Recetas de temporada",
-        "spring": "Primavera",
-        "summer": "Verano",
-        "autumn": "Otoño",
-        "winter": "Invierno"
-    },
-    "months": {
-        "january": "enero",
-        "february": "febrero",
-        "march": "marzo",
-        "april": "abril",
-        "may": "mayo",
-        "june": "junio",
-        "july": "julio",
-        "august": "agosto",
-        "september": "septiembre",
-        "october": "octubre",
-        "november": "noviembre",
-        "december": "diciembre"
-    },
-    "regions": {
-        "spain": "España peninsular"
-    },
-    "sections": {
-        "fruits": "Frutas",
-        "vegetables": "Verduras",
-        "in_season": "En temporada óptima",
-        "ent_leave_season": "Entrando / saliendo de temporada"
 
-    },
-    "frutas": {
-        "aguacate": "aguacate",
-        "albaricoque": "albaricoque",
-        "arandano": "arándano",
-        "caqui": "caqui",
-        "cerezas": "cerezas",
-        "chirimoya": "chirimoya",
-        "ciruela": "ciruela",
-        "datil": "dátil",
-        "frambuesa": "frambuesa",
-        "fresas": "fresa",
-        "granada": "granada",
-        "guayaba": "guayaba",
-        "higos": "higo",
-        "kiwi": "kiwi",
-        "lima": "lima",
-        "limon": "limón",
-        "mandarina": "mandarina",
-        "mango": "mango",
-        "manzana": "manzana",
-        "melocoton": "melocotón",
-        "melon": "melón",
-        "membrillo": "membrillo",
-        "naranja": "naranja",
-        "nectarina": "nectarina",
-        "nispero": "níspero",
-        "papaya": "papaya",
-        "paraguayo": "paraguayo",
-        "pera": "pera",
-        "pitahaya": "pitahaya",
-        "platano": "plátano",
-        "pomelo": "pomelo",
-        "sandia": "sandía",
-        "uvas": "uvas"
-    },
-    "verduras": {
-        "acelga": "acelga",
-        "ajo_seco": "ajo seco",
-        "ajo_tierno": "ajo tierno",
-        "albajaca": "albahaca",
-        "alcachofa": "alcachofa",
-        "apio": "apio",
-        "batata": "batata",
-        "berenjena": "berenjena",
-        "borraja": "borraja",
-        "brocoli": "brócoli",
-        "calabacin": "calabacín",
-        "calabaza": "calabaza",
-        "cardo": "cardo",
-        "cebolla_seca": "cebolla",
-        "cebolla": "cebolleta",
-        "chirivia": "chirivía",
-        "col_lisa": "col lisa",
-        "col_rabano": "col rábano",
-        "coles_de_bruselas": "coles de bruselas",
-        "coliflor": "coliflor",
-        "escarola": "escarola",
-        "esparrago": "espárrago",
-        "espinaca": "espinaca",
-        "guisante": "guisante",
-        "habas": "habas",
-        "hinojo": "hinojo",
-        "judia_verde": "judía verde",
-        "kale": "kale",
-        "lechuga": "lechuga",
-        "lombarda": "lombarda",
-        "maiz": "maiz",
-        "nabo": "nabo",
-        "pack_choi": "pack choi",
-        "patata": "patata",
-        "pepino": "pepino",
-        "perejil": "perejil",
-        "pimiento": "pimiento",
-        "puerro": "puerro",
-        "rabano": "rábano",
-        "remolacha": "remolacha",
-        "repollo": "repollo",
-        "tomate": "tomate",
-        "zanahoria": "zanahoria"
-    },
     "form": {
         "label_first_name": "Nombre",
         "label_last_name": "Apellidos",
@@ -147,22 +31,11 @@
         "donate": "Hazte socio/a",
         "skip": "Saltar"
     },
-    "download_guide_popup": {
-        "text": "Descarga tu guía de frutas y verduras de temporada y descubre el calendario, las recetas y recomendaciones.",
-        "button_yes": "Quiero mi guÍa",
-        "button_no": "No gracias"
-
-    },
     "footer": {
         "label_privacy_link": "Política de privacidad y cookies",
         "url_privacy_link": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
         "label_contact": "Contacto",
         "url_contact": "https://es.greenpeace.org/es/quienes-somos/contacto/"
-    },
-    "nav_buttons" : {
-        "home": "¿De Temporada?",
-        "calendar" : "Calendario",
-        "download" : "Descargar"
     },
     "cookies": {
         "first_dialog": {
