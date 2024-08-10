@@ -11,9 +11,9 @@ module.exports = function () {
 		basedomainVal = "http://localhost:8080";
 		development = true;
 	} else if (environmentVal === "github") {
-		domainVal = "https://greenpeace.github.io/gpes-eleventy";
-		assetsVal = "https://greenpeace.github.io/gpes-eleventy/assets";
-		basedomainVal = "https://greenpeace.github.io";
+		domainVal = "https://osvik.github.io/eleventy-boilerplate-2024";
+		assetsVal = "https://osvik.github.io/eleventy-boilerplate-2024/assets";
+		basedomainVal = "https://osvik.github.io";
 		development = true;
 	} else if (environmentVal === "prod") {
 		domainVal = "https://es.greenpeace.org/es/gpes-eleventy";
