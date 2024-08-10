@@ -1,0 +1,191 @@
+{
+    "home_url": "https://es.greenpeace.org/es/",
+    "title": "Guía de temporada",
+    "description": [
+        "Descripción calendario de frutas y legumbres de temporada"
+    ],
+    "privacy_policy_url": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
+    "menu": {
+        "home": "¿Por qué?",
+        "calendar": "Calendario",
+        "download": "Descargar",
+        "languages": "Idiomas"
+    },
+    "recipesMenu": {
+        "home": "Recetas de temporada",
+        "spring": "Primavera",
+        "summer": "Verano",
+        "autumn": "Otoño",
+        "winter": "Invierno"
+    },
+    "months": {
+        "january": "enero",
+        "february": "febrero",
+        "march": "marzo",
+        "april": "abril",
+        "may": "mayo",
+        "june": "junio",
+        "july": "julio",
+        "august": "agosto",
+        "september": "septiembre",
+        "october": "octubre",
+        "november": "noviembre",
+        "december": "diciembre"
+    },
+    "regions": {
+        "spain": "España peninsular"
+    },
+    "sections": {
+        "fruits": "Frutas",
+        "vegetables": "Verduras",
+        "in_season": "En temporada óptima",
+        "ent_leave_season": "Entrando / saliendo de temporada"
+
+    },
+    "frutas": {
+        "aguacate": "aguacate",
+        "albaricoque": "albaricoque",
+        "arandano": "arándano",
+        "caqui": "caqui",
+        "cerezas": "cerezas",
+        "chirimoya": "chirimoya",
+        "ciruela": "ciruela",
+        "datil": "dátil",
+        "frambuesa": "frambuesa",
+        "fresas": "fresa",
+        "granada": "granada",
+        "guayaba": "guayaba",
+        "higos": "higo",
+        "kiwi": "kiwi",
+        "lima": "lima",
+        "limon": "limón",
+        "mandarina": "mandarina",
+        "mango": "mango",
+        "manzana": "manzana",
+        "melocoton": "melocotón",
+        "melon": "melón",
+        "membrillo": "membrillo",
+        "naranja": "naranja",
+        "nectarina": "nectarina",
+        "nispero": "níspero",
+        "papaya": "papaya",
+        "paraguayo": "paraguayo",
+        "pera": "pera",
+        "pitahaya": "pitahaya",
+        "platano": "plátano",
+        "pomelo": "pomelo",
+        "sandia": "sandía",
+        "uvas": "uvas"
+    },
+    "verduras": {
+        "acelga": "acelga",
+        "ajo_seco": "ajo seco",
+        "ajo_tierno": "ajo tierno",
+        "albajaca": "albahaca",
+        "alcachofa": "alcachofa",
+        "apio": "apio",
+        "batata": "batata",
+        "berenjena": "berenjena",
+        "borraja": "borraja",
+        "brocoli": "brócoli",
+        "calabacin": "calabacín",
+        "calabaza": "calabaza",
+        "cardo": "cardo",
+        "cebolla_seca": "cebolla",
+        "cebolla": "cebolleta",
+        "chirivia": "chirivía",
+        "col_lisa": "col lisa",
+        "col_rabano": "col rábano",
+        "coles_de_bruselas": "coles de bruselas",
+        "coliflor": "coliflor",
+        "escarola": "escarola",
+        "esparrago": "espárrago",
+        "espinaca": "espinaca",
+        "guisante": "guisante",
+        "habas": "habas",
+        "hinojo": "hinojo",
+        "judia_verde": "judía verde",
+        "kale": "kale",
+        "lechuga": "lechuga",
+        "lombarda": "lombarda",
+        "maiz": "maiz",
+        "nabo": "nabo",
+        "pack_choi": "pack choi",
+        "patata": "patata",
+        "pepino": "pepino",
+        "perejil": "perejil",
+        "pimiento": "pimiento",
+        "puerro": "puerro",
+        "rabano": "rábano",
+        "remolacha": "remolacha",
+        "repollo": "repollo",
+        "tomate": "tomate",
+        "zanahoria": "zanahoria"
+    },
+    "form": {
+        "label_first_name": "Nombre",
+        "label_last_name": "Apellidos",
+        "label_email": "Email",
+        "label_id_number": "DNI o NIE",
+        "label_phone_number": "Teléfono",
+        "send_button": "Quiero mi guÍa",
+        "privacy_policy": [
+            "<p><strong>Política de privacidad</strong></p>",
+            "<p data-nosnippet=\"true\">Quiero recibir información acerca de las campañas de Greenpeace y formas de participación. Al firmar, acepto la política de privacidad. Desde GREENPEACE ESPAÑA trataremos los datos aportados en calidad de Responsable del tratamiento con la finalidad de gestionar nuestra relación contigo, en pro de nuestros objetivos fundacionales, en base al consentimiento o a la ejecución de un acuerdo. Puedes ejercer tus derechos enviando un email a contacto.es@greenpeace.org con el asunto “Protección de Datos”. <a target=\"_blank\" href=\"https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/\" class=\"privacy_policy_link_form\">Más información.</a></p>"
+        ],
+        "required": "Campo obligatório",
+        "label_accept_privacy": "Acepto la política de privacidad",
+        "example_id_number": "Ej 1234567x o y1234567x",
+        "example_phone_number": "Ej. 623456789",
+        "error_required": "Campo obligatorio",
+        "error_email": "Un email válido por favor, ej. nombre@dominio.tld",
+        "error_phone": "Tu número de teléfono español por favor",
+        "error_id_number": "Un DNI o NIE españoles. Por ejemplo 82451384H o X6909535J.",
+        "error_privacy": "Falta aceptar la política de privacidad",
+        "yes": "Si",
+        "no": "No",
+        "donate": "Hazte socio/a",
+        "skip": "Saltar"
+    },
+    "download_guide_popup": {
+        "text": "Descarga tu guía de frutas y verduras de temporada y descubre el calendario, las recetas y recomendaciones.",
+        "button_yes": "Quiero mi guÍa",
+        "button_no": "No gracias"
+
+    },
+    "footer": {
+        "label_privacy_link": "Política de privacidad y cookies",
+        "url_privacy_link": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
+        "label_contact": "Contacto",
+        "url_contact": "https://es.greenpeace.org/es/quienes-somos/contacto/"
+    },
+    "nav_buttons" : {
+        "home": "¿De Temporada?",
+        "calendar" : "Calendario",
+        "download" : "Descargar"
+    },
+    "cookies": {
+        "first_dialog": {
+            "header": "Tu privacidad nos importa",
+            "line_1": "En Greenpeace utilizamos cookies propias y de terceros para mejorar y personalizar tu experiencia en nuestra web, así como con fines analíticos, para ofrecer funciones de redes sociales y mostrarte publicidad personalizada en base a un perfil elaborado a partir de tus hábitos de navegación. Para más información puedes consultar nuestra política de cookies <a target=\"_blank\" href=\"https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/?tracking=deny_all#cookies\" x-on:click=\"checkPolicy(); $dipatch('cookies:checkpolicy')\" aria-label=\"política de privacidad\">AQUÍ</a>.",
+            "line_2": "Puedes aceptar todas las cookies mediante el botón “Aceptar” o puedes aceptarlas de forma concreta, modificar su selección o rechazar su uso pulsando en “Configuración de Privacidad”.",
+            "button_accept": "Aceptar",
+            "button_configure": "Configuración de privacidad"
+        },
+        "second_dialog": {
+            "header": "Configuración de privacidad",
+            "line": "Este sitio web utiliza cookies para obtener datos de navegación y de uso de la página por parte de los usuarios y usuarias. Puedes ver más información en nuestra <a target=\"_blank\" href=\"https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/?tracking=deny_all#cookies\">Política de Cookies</a>. A continuación puedes leer más sobre ellas y elegir cuáles aceptas y cuáles rechazas mientras estás en nuestra web.",
+            "button_accept_all": "Aceptar todas",
+            "button_reject_all": "Rechazar todas",
+            "label_cookiesAnalitics": "Cookies analíticas",
+            "desc_cookiesAnalitics": "Permiten analizar el comportamiento de los usuarios/as en nuestra página de manera anónima",
+            "label_cookiesSegmentation": "Cookies de segmentación",
+            "desc_cookiesSegmentation": "Permiten a nuestra web ofrecer contenido optimizado y personalizado",
+            "label_cookiesAdvertisement": "Cookies publicitarias",
+            "desc_cookiesAdvertisement": "Permiten analizar la eficacia de la publicidad online y mostrar anuncios relevantes en otros sitios",
+            "label_cookiesMandatory": "Cookies esenciales",
+            "desc_cookiesMandatory": "Permiten a la página funcionar correctamente y recordar las preferencias de cookies de los usuarios y usuarias",
+            "ok_button": "OK"
+        }
+    }
+}

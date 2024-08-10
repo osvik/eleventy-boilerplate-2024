@@ -1,0 +1,123 @@
+
+
+	<div class="modal" x-show="showModal" :class="{ 'modal-visible-overflow': showModal }">
+
+		<div class="modal-inside" x-show="showModal" x-data="{ 
+                modalDialog: 1,
+                init(){
+                    cookieTrackingManager.read();
+                    trackingScripts.getPageData();
+                    if ( cookieTrackingManager.needToAskConsent() ) {
+                        this.showModal = true;
+                        setTimeout(function(){
+                            document.getElementById('butyes').focus();
+                         }, 1000);
+                    } else {
+                        trackingScripts.initAll();
+                    }
+                },
+                values: {
+                    cookiesAnalitics: false,
+                    cookiesSegmentation: false,
+                    cookiesAdvertisement: false,
+                    cookiesMandatory: true
+                },
+                accept(){
+                    cookieTrackingManager.consent.allowAll = true;
+                    delete(cookieTrackingManager.consent.denyAll);
+                    cookieTrackingManager.write();
+                    cookieTrackingManager.writeEvent();
+                    trackingScripts.initAll();
+                    setCookie('gp_anonymous_id', window.uuid, 365 * 2);
+                    this.showModal = false;
+                },
+                configure(){
+                    this.modalDialog = 2;
+                },
+                acceptAll(){
+                    cookieTrackingManager.consent.allowAll = true;
+                    delete(cookieTrackingManager.consent.denyAll);
+                    cookieTrackingManager.write();
+                    cookieTrackingManager.writeEvent();
+                    trackingScripts.initAll();
+                    setCookie('gp_anonymous_id', window.uuid, 365 * 2);
+                    this.showModal = false;
+                },
+                refuseAll(){
+                    cookieTrackingManager.consent.denyAll = true;
+                    delete(cookieTrackingManager.consent.allowAll);
+                    cookieTrackingManager.erraseAll(); 
+                    trackingScripts.initAll();
+                    this.showModal = false;
+                },
+                okSelected(){
+                    cookieTrackingManager.consent.cats = {};
+                    cookieTrackingManager.consent.cats.analytics = this.values.cookiesAnalitics;
+                    cookieTrackingManager.consent.cats.segmentation = this.values.cookiesSegmentation;
+                    cookieTrackingManager.consent.cats.advertisement = this.values.cookiesAdvertisement;
+                    cookieTrackingManager.write();
+                    cookieTrackingManager.writeEvent();
+                    trackingScripts.initAll();
+                    if ( cookieTrackingManager.consent.cats.analytics ) {
+                        setCookie('gp_anonymous_id', window.uuid, 365 * 2);
+                    }
+                    this.showModal = false;
+                }
+            }">
+
+			<div x-show="modalDialog === 1" x-bind:aria-hidden="not(modalDialog === 1)">
+				<h2>{{ cookies.first_dialog.header }}</h2>
+				<p>{{ cookies.first_dialog.line_1 | safe }}</p>
+				<p>{{ cookies.first_dialog.line_2 | safe }}</p>
+				<div class="modal-bt-row">
+					<button class="popup-yes" id="butyes" x-on:click="accept(); $dispatch('cookies:accept');">{{ cookies.first_dialog.button_accept }}</button>
+					<button class="popup-no" x-on:click="configure(); $dispatch('cookies:config');">{{ cookies.first_dialog.button_configure }}</button>
+				</div>
+			</div>
+
+			<div x-show="modalDialog === 2" x-bind:aria-hidden="not(modalDialog === 2)">
+				<h2>{{ cookies.second_dialog.header }}</h2>
+				<p>{{ cookies.second_dialog.line | safe }}</p>
+                <div class="modal-bt-row">
+					<button class="popup-yes" x-on:click="acceptAll(); $dispatch('cookies:acceptall');">{{ cookies.second_dialog.button_accept_all }}</button>
+					<button class="popup-no" x-on:click="refuseAll(); $dispatch('cookies:denytall');">{{ cookies.second_dialog.button_reject_all }}</button>
+				</div>
+                <form>
+                    <div>
+                        <input type="checkbox" value="" id="cookiesAnalitics" x-model="values.cookiesAnalitics">
+                        <label for="cookiesAnalitics">
+                            {{ cookies.second_dialog.label_cookiesAnalitics }}
+                        </label>
+                        <p>{{ cookies.second_dialog.desc_cookiesAnalitics }}</p>
+                    </div>
+                    <div>
+                        <input type="checkbox" value="" id="cookiesSegmentation" x-model="values.cookiesSegmentation">
+                        <label for="cookiesSegmentation">
+                            {{ cookies.second_dialog.label_cookiesSegmentation }}
+                        </label>
+                        <p>{{ cookies.second_dialog.desc_cookiesSegmentation }}</p>
+                    </div>
+                    <div>
+                        <input type="checkbox" value="" id="cookiesAdvertisement" x-model="values.cookiesAdvertisement">
+                        <label for="cookiesAdvertisement">
+                            {{ cookies.second_dialog.label_cookiesAdvertisement }}
+                        </label>
+                        <p>{{ cookies.second_dialog.desc_cookiesAdvertisement }}</p>
+                    </div>
+                    <div>
+                        <input type="checkbox" value="" id="cookiesMandatory" checked="" disabled="" x-model="values.cookiesMandatory">
+                        <label>
+                            {{ cookies.second_dialog.label_cookiesMandatory }}
+                        </label>
+                        <p>{{ cookies.second_dialog.desc_cookiesMandatory }}</p>
+                    </div>
+                    <div class="modal-bt-row">
+					    <button type="button" class="popup-yes" x-on:click="okSelected(); $dispatch('cookies:ok')"> &nbsp; {{ cookies.second_dialog.ok_button }} &nbsp; </button>
+				    </div>
+                </form>
+			</div>
+
+		</div>
+
+	</div><!-- / Modal overlay -->
+
