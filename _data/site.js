@@ -9,17 +9,17 @@ module.exports = function () {
 		domainVal = "http://localhost:8080";
 		assetsVal = "http://localhost:8080/assets";
 		basedomainVal = "http://localhost:8080";
-		development_siteVal = true;
+		development = true;
 	} else if (environmentVal === "github") {
 		domainVal = "https://greenpeace.github.io/gpes-eleventy";
 		assetsVal = "https://greenpeace.github.io/gpes-eleventy/assets";
 		basedomainVal = "https://greenpeace.github.io";
-		development_siteVal = true;
+		development = true;
 	} else if (environmentVal === "prod") {
 		domainVal = "https://es.greenpeace.org/es/gpes-eleventy";
 		assetsVal = "https://es.greenpeace.org/wp-content/themes/gpes-eleventy/assets";
 		basedomainVal = "https://es.greenpeace.org";
-		development_siteVal = false;
+		development = false;
 	}
 
 	return {
@@ -27,7 +27,7 @@ module.exports = function () {
 		domain: domainVal,
 		basedomain: basedomainVal,
 		assets: assetsVal,
-		development_site: development_siteVal,
+		isDev: development,
 		version: "0.5"
 	};
 };
