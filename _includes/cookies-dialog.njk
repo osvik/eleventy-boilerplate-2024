@@ -26,7 +26,6 @@
                     cookieTrackingManager.consent.allowAll = true;
                     delete(cookieTrackingManager.consent.denyAll);
                     cookieTrackingManager.write();
-                    cookieTrackingManager.writeEvent();
                     trackingScripts.initAll();
                     setCookie('gp_anonymous_id', window.uuid, 365 * 2);
                     this.showModal = false;
@@ -38,7 +37,6 @@
                     cookieTrackingManager.consent.allowAll = true;
                     delete(cookieTrackingManager.consent.denyAll);
                     cookieTrackingManager.write();
-                    cookieTrackingManager.writeEvent();
                     trackingScripts.initAll();
                     setCookie('gp_anonymous_id', window.uuid, 365 * 2);
                     this.showModal = false;
@@ -56,7 +54,6 @@
                     cookieTrackingManager.consent.cats.segmentation = this.values.cookiesSegmentation;
                     cookieTrackingManager.consent.cats.advertisement = this.values.cookiesAdvertisement;
                     cookieTrackingManager.write();
-                    cookieTrackingManager.writeEvent();
                     trackingScripts.initAll();
                     if ( cookieTrackingManager.consent.cats.analytics ) {
                         setCookie('gp_anonymous_id', window.uuid, 365 * 2);
