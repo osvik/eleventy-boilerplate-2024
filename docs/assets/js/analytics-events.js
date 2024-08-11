@@ -1,26 +1,4 @@
 /**
- * On popup close
- */
-document.addEventListener("popup:close", function (e) {
-	gtag("event", "Click", {
-		'event_category': "FrutaTemporada",
-		'event_label': "ClosePopup",
-		'value': 0
-	});
-});
-
-/**
- * On popup download
- */
-document.addEventListener("popup:download", function (e) {
-	gtag("event", "Click", {
-		'event_category': "FrutaTemporada",
-		'event_label': "DownloadPopup",
-		'value': 0
-	});
-});
-
-/**
  * On form start
  */
 let formAlreadyStarted = false;
@@ -200,6 +178,8 @@ document.addEventListener('cookies:accept', function (e) {
 		'non_interaction': true
 	});
 
+	cookieTrackingManager.writeEvent();
+
 	if (document.location.href.includes("descarga")) {
 		delayedOutbrain();
 	}
@@ -237,6 +217,9 @@ document.addEventListener('cookies:acceptall', function (e) {
 		'event_category': 'CookiePrivacy',
 		'non_interaction': true
 	});
+
+	cookieTrackingManager.writeEvent();
+
 	if (document.location.href.includes("descarga")) {
 		delayedOutbrain();
 	}
@@ -251,6 +234,8 @@ document.addEventListener('cookies:denytall', function (e) {
 		'event_category': 'CookiePrivacy',
 		'non_interaction': true
 	});
+
+	cookieTrackingManager.writeEvent();
 });
 
 /**
@@ -262,6 +247,9 @@ document.addEventListener('cookies:ok', function (e) {
 		'event_category': 'CookiePrivacy',
 		'non_interaction': true
 	});
+
+	cookieTrackingManager.writeEvent();
+	
 	if (document.location.href.includes("descarga")) {
 		delayedOutbrain();
 	}
