@@ -13,7 +13,8 @@
     --hover-color: rgb(255, 240, 10);
     --light-background: #f1f1f1;
     --headers-font: "Work Sans", sans-serif;
-    --regular-font: "Source Serif 4", serif;;
+    --regular-font: "Source Serif 4", serif;
+    ;
     --light-font-weight: 300;
     --bold-font-weight: 800;
     --text-line-height: 1.5rem;
@@ -32,11 +33,11 @@ body {
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
+    clip: rect(0, 0, 0, 0);
     border: 0;
-  }
+}
 
-  body {
+body {
     font-family: var(--regular-font);
     line-height: var(--text-line-height);
 }
