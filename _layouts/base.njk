@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}">
-<head>
-	{% block head %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    {% include "metas.njk" %}
-    {% set css %}{% include "critical/base.css" %}{% endset %}
-    <style>
-      {{ css | cssmin | safe }}
-    </style>
-    <link rel="preload" as="style" href="{{ site.assets }}/css/base.css?v={{ site.version }}" onload="this.rel='stylesheet'" />
+    <head>
+        {% block head %}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{{ title }}</title>
+            {% include "metas.njk" %}
+            {% set css %}{% include "critical/base.css" %}{% endset %}
+            <style>
+                {{css | cssmin | safe}}
+            </style>
+            <link rel="preload" as="style" href="{{ site.assets }}/css/base.css?v={{ site.version }}" onload="this.rel='stylesheet'"/>
 
-	{% include "analytics.njk"%}
-	
-    <script src="{{ site.assets}}/js/global.js" defer></script>
-    <script src="{{ site.assets}}/js/persist.min.js" defer></script>
-    <script src="{{ site.assets}}/js/alpine3-14-1.min.js" defer></script>
-	{% endblock %}
-</head>
-<body x-data="{ showModal: false }">
-{{ content | safe }}
+            {% include "analytics.njk"%}
 
-{% include "cookies-dialog.njk" %}
+            <script src="{{ site.assets}}/js/global.js" defer></script>
+            <script src="{{ site.assets}}/js/persist.min.js" defer></script>
+            <script src="{{ site.assets}}/js/alpine3-14-1.min.js" defer></script>
+        {% endblock %}
+    </head>
+    <body x-data="{ showModal: false }">
+        {{ content | safe }}
 
-<div id="hubspotEmbed"></div>
-</body>
+        {% include "cookies-dialog.njk" %}
+
+        <div id="hubspotEmbed"></div>
+    </body>
 </html>
-
-
