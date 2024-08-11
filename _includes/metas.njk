@@ -1,16 +1,15 @@
 {% if site.isDev %}
-    <meta name="robots" content="noindex" />
+    <meta name="robots" content="noindex">
     <link rel="icon" href="{{ site.assets }}/img/icons/favicon-32.png" sizes="32x32">
 {% else %}
-    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 {% endif %}
-    <link rel="canonical" href="{{ site.basedomain }}{{ permalink }}" />
-    <meta name="description" content="{{ open_graph.description }}" />
+<link rel="canonical" href="{{ site.basedomain }}{{ permalink }}">
+<meta name="description" content="{{ open_graph.description }}">
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="{{ open_graph.title }}" />
-    <meta property="og:url" content="{{ site.basedomain }}{{ permalink }}" />
-    <meta property="og:description" content="{{ open_graph.description }}" />
-    <meta property="og:site_name" content="{{ title }}" />
-    <meta property="og:image" content="{{ site.assets }}/img/open-graph/{{ open_graph.image }}" />
-
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="{{ open_graph.title }}"/>
+<meta property="og:url" content="{{ site.basedomain }}{{ permalink }}">
+<meta property="og:description" content="{{ open_graph.description }}">
+<meta property="og:site_name" content="{{ title }}"/>
+<meta property="og:image" content="{{ site.assets }}/img/open-graph/{{ open_graph.image }}"/>
