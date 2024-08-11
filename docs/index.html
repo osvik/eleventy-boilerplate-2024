@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        
+    
+        <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Eleventy boilerplate</title>
@@ -10,8 +10,9 @@
     <link rel="icon" href="https://osvik.github.io/eleventy-boilerplate-2024/assets/img/icons/favicon-32.png" sizes="32x32">
 
 <link rel="canonical" href="https://osvik.github.io/">
-<meta name="description" content="My open graph description">
+<meta name="description" content="My description">
 
+<meta property="og:locale" content="es" />
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="My open graph title"/>
 <meta property="og:url" content="https://osvik.github.io/">
@@ -19,12 +20,14 @@
 <meta property="og:site_name" content="Eleventy boilerplate"/>
 <meta property="og:image" content="https://osvik.github.io/eleventy-boilerplate-2024/assets/img/open-graph/example.jpg"/>
             
-            <style>
-                [x-cloak]{display:none!important}
-            </style>
-            <link rel="preload" as="style" href="https://osvik.github.io/eleventy-boilerplate-2024/assets/css/base.css?v=0.5" onload="this.rel='stylesheet'"/>
-
-            <!-- Statistics I -->
+                
+                <style>
+                    [x-cloak]{display:none!important}
+                </style>
+                <link rel="preload" as="style" href="https://osvik.github.io/eleventy-boilerplate-2024/assets/css/base.css?v=0.5" onload="this.rel='stylesheet'"/>
+            
+            
+                <!-- Statistics I -->
 
 <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/cookieTrackingManager.js?v=0.5" defer></script>
 <script src="https://es.greenpeace.org/es/wp-content/themes/gp/assets/js/sha256.min.js" defer></script>
@@ -150,17 +153,21 @@
 </script>
 
 <!-- / Statistics I -->
+            
+            
+                <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/global.js" defer="defer"></script>
+                <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/persist.min.js" defer="defer"></script>
+                <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/alpine3-14-1.min.js" defer="defer"></script>
+            
+        </head>
+    
+    
+        <body x-data="{ showModal: false }">
 
-            <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/global.js" defer></script>
-            <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/persist.min.js" defer></script>
-            <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/alpine3-14-1.min.js" defer></script>
-        
-    </head>
-    <body x-data="{ showModal: false }">
-        
+            
 <h1>Hello world</h1>
 
-        <!-- Modal cookies -->
+            <!-- Modal cookies -->
 <div class="modal" x-cloak x-show="showModal" :class="{ 'modal-visible-overflow': showModal }">
 
     <div class="modal-inside" x-show="showModal" x-data="{ 
@@ -280,6 +287,7 @@
 </div>
 <!-- / Modal cookies -->
 
-        <div id="hubspotEmbed"></div>
-    </body>
+            <div id="hubspotEmbed"></div>
+        </body>
+    
 </html>

@@ -32,9 +32,9 @@ document.addEventListener('form:submit', function (e) {
 	gtag("event", "Signup", {
 		"event_category": 'FrutaTemporada',
 		"event_label": "?FIXME",
-		"value": 0, // FIXME Nuevo valor para firma
-		"new_email": existingOrNew == "New" ? true : false,
-		"has_phone": true,
+		"value": 0,
+		"new_email": existingOrNew === "New" ? true : false,
+		"has_phone": includesPhone === "Yes" ? true : false,
 		"has_zip": false
 	});
 

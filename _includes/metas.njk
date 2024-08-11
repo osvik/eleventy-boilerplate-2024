@@ -5,8 +5,9 @@
     <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 {% endif %}
 <link rel="canonical" href="{{ site.basedomain }}{{ permalink }}">
-<meta name="description" content="{{ open_graph.description }}">
+<meta name="description" content="{{ description }}">
 
+<meta property="og:locale" content="{{ lang }}" />
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="{{ open_graph.title }}"/>
 <meta property="og:url" content="{{ site.basedomain }}{{ permalink }}">

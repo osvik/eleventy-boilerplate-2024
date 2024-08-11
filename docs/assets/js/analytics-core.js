@@ -221,7 +221,7 @@ const trackingScripts = {
      */
     hubspot: function () {
         
-        // Needs <div id="hubspotEmbed"></div> in the html before using this script FIXME
+        // Needs <div id="hubspotEmbed"></div> in the html before using this script
         var t = document.getElementById("hubspotEmbed"),
             e = document.createElement("script");
         e.src = "//js.hs-scripts.com/5361482.js"; 
