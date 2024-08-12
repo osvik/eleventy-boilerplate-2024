@@ -50,6 +50,140 @@ h4 {
     font-weight: var(--bold-font-weight);
 }
 
+/* MENU BAR */
+
+.topmenu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.topmenu {
+    background: var(--second-bg-color);
+    padding: 0 15px;
+}
+
+.topmenu a {
+    color: var(--second-color);
+    text-decoration: none;
+}
+
+.menu,
+.submenu {
+    list-style-type: none;
+}
+
+.submenu {
+    position: absolute;
+    background-color: var(--second-bg-color);
+    left: 40%
+}
+
+.logo {
+    font-size: 1.5rem;
+    padding: 5px 10px 5px 0;
+}
+
+.item {
+    padding: 10px;
+}
+
+.item a:hover,
+.item a:hover::after {
+    color: var(--hover-color);
+}
+
+/* Mobile */
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu li a {
+    display: block;
+    padding: 10px 5px;
+}
+
+.menu li.subitem a {
+    padding: 15px;
+}
+
+.toggle {
+    order: 1;
+    font-size: 1.5rem;
+}
+
+.item {
+    order: 3;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.active .item {
+    display: block;
+}
+
+.has-submenu>a::after {
+    font-family: "Font Awesome 5 Free";
+    font-size: .8rem;
+    line-height: .8rem;
+    font-weight: 900;
+    content: "\f078";
+    color: white;
+    padding-left: .7rem;
+}
+
+.subitem a {
+    padding: 10px 15px;
+}
+
+/* Tablet */
+
+@media all and (min-width: 700px) {
+    .menu {
+        justify-content: center;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+    .toggle {
+        flex: 1;
+        text-align: right;
+        order: 2;
+    }
+
+}
+
+/* Desktop */
+
+@media all and (min-width: 960px) {
+    .menu {
+        align-items: flex-start;
+        flex-wrap: nowrap;
+        background: none;
+    }
+
+    .logo {
+        order: 0;
+    }
+
+    .item {
+        order: 1;
+        position: relative;
+        display: block;
+        width: auto;
+    }
+
+    .toggle {
+        display: none;
+    }
+}
+
 /**
  * Cookies CSS
  */
