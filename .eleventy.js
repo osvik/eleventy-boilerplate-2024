@@ -4,7 +4,8 @@ const CleanCSS = require("clean-css");
 // Export a function that takes the Eleventy configuration object as a parameter
 module.exports = (function (eleventyConfig) {
     // Add the 'assets' directory to the list of files to copy to the output directory
-    eleventyConfig.addPassthroughCopy("assets");
+    eleventyConfig.addPassthroughCopy("assets/img");
+    eleventyConfig.addPassthroughCopy("assets/js");
 
     // Add the 'favicon.ico' file to the list of files to copy to the output directory
     eleventyConfig.addPassthroughCopy("favicon.ico");
