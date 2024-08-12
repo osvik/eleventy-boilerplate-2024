@@ -1,3 +1,10 @@
+:root {
+    --button-yes-color: #b7ffc9;
+    --button-yes-color-hover: #dcfedb;
+    --button-no-color:  #ffb7b7;
+    --button-no-color-hover:  #fedbdb;
+}
+
 .modal {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
@@ -55,19 +62,19 @@
 }
 
 .cookies-yes {
-    background-color: #b7ffc9;
+    background-color: var(--button-yes-color);
 }
 
 .cookies-yes:hover {
-    background-color: #dcfedb;
+    background-color: var(--button-yes-color-hover);
 }
 
 .cookies-no {
-    background-color: #ffb7b7;
+    background-color: var(--button-no-color);
 }
 
 .cookies-no:hover {
-    background-color: #fedbdb;
+    background-color: var(--button-no-color-hover);
 }
 
 @media (min-width: 480px) {

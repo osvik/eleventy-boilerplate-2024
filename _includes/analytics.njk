@@ -1,7 +1,10 @@
 <!-- Statistics I -->
 
+{% if ab_testing or site.ab_testing %}
+<script src="{{ site.assets }}/js/AbrantesPlus.js?v={{ site.version }}"></script>
+{% endif %}
 <script src="{{ site.assets }}/js/cookieTrackingManager.js?v={{ site.version }}" defer></script>
-<script src="https://es.greenpeace.org/es/wp-content/themes/gp/assets/js/sha256.min.js" defer></script>
+<script src="{{ site.assets }}/js/sha256.min.js" defer></script>
 <script src="{{ site.assets }}/js/analytics-core.js?v={{ site.version }}" defer></script>
 <script src="{{ site.assets }}/js/analytics-events.js?v={{ site.version }}" defer></script>
 

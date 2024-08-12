@@ -3,19 +3,17 @@
  */
 
 :root {
-    --text-color: #000;
-    --light-text-color: #979494;
-    --second-color: #fff;
+    --text-color: #212529;
+    --light-text-color: #ffffff;
+    --main-bg-color: #ffffff;
+    --second-bg-color: #f6f6f5;
+    --third-bg-color: #144005;
     --links-color: #ff683a;
-    --main-bg-color: #fff;
-    --second-bg-color: #ff683a;
     --links-hover: #cb5937;
     --hover-color: rgb(255, 240, 10);
-    --light-background: #f1f1f1;
     --headers-font: "Work Sans", sans-serif;
     --regular-font: "Source Serif 4", serif;
-    ;
-    --light-font-weight: 300;
+    --light-font-weight: 200;
     --bold-font-weight: 800;
     --text-line-height: 1.5rem;
 }
@@ -24,6 +22,12 @@ html,
 body {
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: var(--regular-font);
+    line-height: var(--text-line-height);
+    background-color: var(--main-bg-color);
 }
 
 .sr-only {
@@ -35,11 +39,6 @@ body {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-}
-
-body {
-    font-family: var(--regular-font);
-    line-height: var(--text-line-height);
 }
 
 h1,
