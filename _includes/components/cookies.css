@@ -5,8 +5,8 @@
 :root {
     --button-yes-color: #b7ffc9;
     --button-yes-color-hover: #dcfedb;
-    --button-no-color:  #ffb7b7;
-    --button-no-color-hover:  #fedbdb;
+    --button-no-color: #ffb7b7;
+    --button-no-color-hover: #fedbdb;
 }
 
 .modal {
