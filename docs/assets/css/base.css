@@ -50,6 +50,7 @@ h4 {
     font-weight: var(--bold-font-weight);
 }
 
+
 /* MENU BAR */
 
 .topmenu ul {
@@ -296,6 +297,7 @@ h4 {
         max-width: 450px;
     }
 }
+
 
 /**
  * Fonts

@@ -27,18 +27,9 @@
     {% block body %}
         <body x-data="{ showModal: false }">
 
-    {% block menubar %}
-    <nav x-data="{ openMobile : false }" class="topmenu">
-        <ul class="menu" x-bind:class="openMobile ? 'active' : ''">
-            <li class="logo"><a href="./">{{ title }}</a></li>
-            <li class="item"><a href="./">{{ menu.home }}</a></li>
-            <li class="item"><a href="./calendario/">{{ menu.calendar }}</a></li>
-            <li class="item"><a href="./descargar-guia/">{{ menu.download }}</a></li>
-            <li class="toggle" x-on:click="openMobile = ! openMobile"><a href="#/menu" aria-label="Menu"><span class="fas fa-bars"
-                        x-bind:class="openMobile ? 'fa-times' : 'fa-bars'"><span class="sr-only">{{ mobile_menu }}</span></span></a></li>
-        </ul>
-    </nav>
-    {% endblock %}
+            {% block menubar %}
+                {% include "topmenu.njk" %}
+            {% endblock %}
 
             {{ content | safe }}
 

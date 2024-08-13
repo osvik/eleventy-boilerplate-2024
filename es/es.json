@@ -7,11 +7,26 @@
     ],
     "privacy_policy_url": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
 
-    "menu" : {
-        "home" : "Home",
-        "calendar": "Calendario",
-        "download" : "Descarga"
-    },
+    "top_menu" : [
+
+        {
+            "id" : "m0",
+            "text" : "Home",
+            "url" : "./"
+        },
+
+        {
+            "id" : "m1",
+            "text" : "Calendario",
+            "url" : "./calendario/"
+        },
+        {
+            "id" : "m2",
+            "text" : "Descarga",
+            "url" : "./descargar-guia/"
+        }
+
+    ],
 
     "mobile_menu" : "Menu",
 

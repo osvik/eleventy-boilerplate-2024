@@ -1,0 +1,16 @@
+<nav x-data="{ openMobile : false }" class="topmenu">
+    <ul class="menu" x-bind:class="openMobile ? 'active' : ''">
+        <li class="logo">
+            <a href="./">{{ title }}</a>
+        </li>
+        {% for menu in top_menu %}
+            <li class="item">
+                <a href="{{ menu.url }}">{{ menu.text }}</a>
+            </li>
+        {% endfor %}
+        <li class="toggle" x-on:click="openMobile = ! openMobile">
+            <a href="#/menu" aria-label="Menu"><span class="fas fa-bars"
+                        x-bind:class="openMobile ? 'fa-times' : 'fa-bars'"><span class="sr-only">{{ mobile_menu }}</span></span></a>
+        </li>
+    </ul>
+</nav>

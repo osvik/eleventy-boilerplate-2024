@@ -166,18 +166,33 @@
     
         <body x-data="{ showModal: false }">
 
-    
-    <nav x-data="{ openMobile : false }" class="topmenu">
-        <ul class="menu" x-bind:class="openMobile ? 'active' : ''">
-            <li class="logo"><a href="./">Eleventy boilerplate</a></li>
-            <li class="item"><a href="./">Home</a></li>
-            <li class="item"><a href="./calendario/">Calendario</a></li>
-            <li class="item"><a href="./descargar-guia/">Descarga</a></li>
-            <li class="toggle" x-on:click="openMobile = ! openMobile"><a href="#/menu" aria-label="Menu"><span class="fas fa-bars"
-                        x-bind:class="openMobile ? 'fa-times' : 'fa-bars'"><span class="sr-only">Menu</span></span></a></li>
-        </ul>
-    </nav>
-    
+            
+                <nav x-data="{ openMobile : false }" class="topmenu">
+    <ul class="menu" x-bind:class="openMobile ? 'active' : ''">
+        <li class="logo">
+            <a href="./">Eleventy boilerplate</a>
+        </li>
+        
+            <li class="item">
+                <a href="./">Home</a>
+            </li>
+        
+            <li class="item">
+                <a href="./calendario/">Calendario</a>
+            </li>
+        
+            <li class="item">
+                <a href="./descargar-guia/">Descarga</a>
+            </li>
+        
+        <li class="toggle" x-on:click="openMobile = ! openMobile">
+            <a href="#/menu" aria-label="Menu"><span class="fas fa-bars"
+                        x-bind:class="openMobile ? 'fa-times' : 'fa-bars'"><span class="sr-only">Menu</span></span></a>
+        </li>
+    </ul>
+</nav>
+
+            
 
             
 <h1>Sed ut perspiciatis unde omnis iste natus</h1>
