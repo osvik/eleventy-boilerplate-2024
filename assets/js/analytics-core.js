@@ -96,6 +96,7 @@ const trackingScripts = {
             this.googleAnalyticsFooter();
             this.googleTagManager();
             this.hotjar();
+            storeUTMParameters();
         } else {
             this.googleAnalyticsFooter();
         }
@@ -126,7 +127,10 @@ const trackingScripts = {
         let contentLabels =[];
         let contentTags =[];
 
-        if ( typeof gtag === "function") {           
+        if ( typeof gtag === "function") {  
+            
+            googleTrackingConfig.cookie_consent = getConsentString();
+            
             gtag('config', 'G-7NL9SM5MNP', googleTrackingConfig);
         }
 
