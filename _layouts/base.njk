@@ -31,7 +31,33 @@
                 {% include "topmenu.njk" %}
             {% endblock %}
 
-            {{ content | safe }}
+            <div id="content">
+
+                {% block openspace %}
+                    <section>
+                        {{ open_space | safe }}
+                    </section>
+                {% endblock %}
+
+                {% block content1 %}
+                    <section>
+                        {{ content_1 | safe }}
+                    </section>
+                {% endblock %}
+
+                {% block content2 %}
+                    <section>
+                        {{ content_2 | safe }}
+                    </section>
+                {% endblock %}
+
+            </div>
+
+            {% block footer %}
+                <footer>
+                    This is the footer      
+                </footer>
+            {% endblock %}
 
             {% include "cookies-dialog.njk" %}
 
