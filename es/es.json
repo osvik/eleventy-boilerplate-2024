@@ -12,18 +12,21 @@
         {
             "id" : "m0",
             "text" : "Home",
-            "url" : "./"
+            "external" : false,
+            "url" : "/"
         },
 
         {
             "id" : "m1",
             "text" : "Calendario",
-            "url" : "./calendario/"
+            "external" : false,
+            "url" : "/calendario/"
         },
         {
             "id" : "m2",
-            "text" : "Descarga",
-            "url" : "./descargar-guia/"
+            "text" : "Noticias",
+            "external" : true,
+            "url" : "https://es.greenpeace.org/es/noticias/"
         }
 
     ],

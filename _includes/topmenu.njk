@@ -5,7 +5,11 @@
         </li>
         {% for menu in top_menu %}
             <li class="item">
-                <a href="{{ menu.url }}">{{ menu.text }}</a>
+                {% if menu.external == true %}
+                    <a href="{{ menu.url }}">{{ menu.text }}</a>
+                {% else %}
+                <a href="{{ site.domain }}{{ menu.url }}">{{ menu.text }}</a>
+                {% endif %}
             </li>
         {% endfor %}
         <li class="toggle" x-on:click="openMobile = ! openMobile">
