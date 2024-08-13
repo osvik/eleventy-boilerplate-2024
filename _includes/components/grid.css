@@ -22,3 +22,12 @@ main {
     'content1'
     'content2'
 }
+
+@media screen and (min-width: 800px) {
+    main {
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas: 
+        'openspace openspace'
+        'content1 content2'
+    }
+}
