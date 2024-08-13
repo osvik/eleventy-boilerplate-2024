@@ -50,6 +50,14 @@ h4 {
     font-weight: var(--bold-font-weight);
 }
 
+/* PRINT */
+
+@media print {
+    nav, footer {
+        display: none;
+    }
+}
+
 
 /* MENU BAR */
 
@@ -303,6 +311,27 @@ h4 {
 /**
  * CSS Grid
  */
+
+.openspace {
+    grid-area: openspace;
+}
+
+.content1 {
+    grid-area: content1;
+}
+
+.content2 {
+    grid-area: content2;
+}
+
+main {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-areas: 
+    'openspace'
+    'content1'
+    'content2'
+}
 
 
 /**

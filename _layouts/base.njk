@@ -31,27 +31,27 @@
                 {% include "topmenu.njk" %}
             {% endblock %}
 
-            <div id="content">
+            <main>
 
                 {% block openspace %}
-                    <section>
+                    <section class="openspace">
                         {{ open_space | safe }}
                     </section>
                 {% endblock %}
 
                 {% block content1 %}
-                    <section>
+                    <section class="content1">
                         {{ content_1 | safe }}
                     </section>
                 {% endblock %}
 
                 {% block content2 %}
-                    <section>
+                    <section class="content2">
                         {{ content_2 | safe }}
                     </section>
                 {% endblock %}
 
-            </div>
+            </main>
 
             {% block footer %}
                 <footer>

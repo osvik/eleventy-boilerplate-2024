@@ -48,3 +48,11 @@ h4 {
     font-family: var(--headers-font);
     font-weight: var(--bold-font-weight);
 }
+
+/* PRINT */
+
+@media print {
+    nav, footer {
+        display: none;
+    }
+}
