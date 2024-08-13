@@ -6,12 +6,12 @@
 }
 
 .topmenu {
-    background: var(--second-bg-color);
+    background: var(--third-bg-color);
     padding: 0 15px;
 }
 
 .topmenu a {
-    color: var(--second-color);
+    color: var(--light-text-color);
     text-decoration: none;
 }
 
@@ -130,4 +130,28 @@
     .toggle {
         display: none;
     }
+}
+
+/* FONT-FACE */
+
+@font-face {
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url(../fonts/icons.woff2) format("woff2");
+}
+
+.fa,
+.fas {
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+}
+
+.fa-bars::before {
+    content: "\f0c9";
+}
+
+.fa-times::before {
+    content: "\f00d";
 }

@@ -6,6 +6,7 @@ module.exports = (function (eleventyConfig) {
     // Add the 'assets' directory to the list of files to copy to the output directory
     eleventyConfig.addPassthroughCopy("assets/img");
     eleventyConfig.addPassthroughCopy("assets/js");
+    eleventyConfig.addPassthroughCopy("assets/fonts");
 
     // Add the 'favicon.ico' file to the list of files to copy to the output directory
     eleventyConfig.addPassthroughCopy("favicon.ico");
