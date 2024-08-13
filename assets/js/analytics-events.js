@@ -1,309 +1,332 @@
 /**
- * On form start
+ * Configuring analytics events
  */
-let formAlreadyStarted = false;
-document.addEventListener('form:click', function (e) {
-	if (!formAlreadyStarted) {
-		dataLayer.push({
-			'event': 'form_started',
-			'form_goal': 'Download',
-			'form_plugin': 'no_plugin',
-			'form_title': 'Fruta de temporada',
-			'form_id': '0a6163f6-f99b-489a-821a-b0ebbf6dd284',
-			'salesforce_campaign': '70108000000iSckAAE'
-		});
-	}
-	formAlreadyStarted = true;
-});
 
-/**
- * On form submit sucessfuly
- */
-document.addEventListener('form:submit', function (e) {
-	const existingOrNew = e.detail.was_contact ? 'Existing' : 'New';
+{
+    const SALESFORCE_CAMPAIGN = "70108000000iSckAAE";
 
-	let includesPhone;
-	if (document.getElementById("phone_number").value) {
-		includesPhone = "Yes";
-	} else {
-		includesPhone = "No";
-	}
+    const HUBSPOT_FORM_ID = "0a6163f6-f99b-489a-821a-b0ebbf6dd284";
 
-	gtag("event", "Signup", {
-		"event_category": 'FrutaTemporada',
-		"event_label": "?FIXME",
-		"value": 0,
-		"new_email": existingOrNew === "New" ? true : false,
-		"has_phone": includesPhone === "Yes" ? true : false,
-		"has_zip": false
-	});
+    const FORM_GOAL = "Download";
 
-	if (cookieTrackingManager.canItrack("analytics") && cookieTrackingManager.canItrack("segmentation")) {
-		dataLayer.push({
-			'event': 'user_identified',
-			'distinct_id': sha256(document.querySelector("#email").value.trim().toLowerCase()),
-			'registration_type': 'Lead',
-			'consent_analytics': cookieTrackingManager.canItrack("analytics").toString().toUpperCase(),
-			'consent_segmentation': cookieTrackingManager.canItrack("segmentation").toString().toUpperCase(),
-			'consent_marketing': cookieTrackingManager.canItrack("advertisement").toString().toUpperCase(),
-			'user_type': 'profiled'
-		});
-	}
+    const HUBSPOT_FORM_TITLE = "Fruta de temporada";
 
-	// Sends form submit event to Mixpanel
-	dataLayer.push({
-		'event': 'form_submitted',
-		'form_goal': 'Petition Signup',
-		'form_plugin': 'none',
-		'form_title': 'Fruta de temporada',
-		'form_id': '0a6163f6-f99b-489a-821a-b0ebbf6dd284',
-		'salesforce_campaign': '70108000000iSckAAE'
-	});
+    const ADWORDS_ACCOUNT_ID = 1053230267;
 
-	if (existingOrNew == "New") {
-		gtag('event', "generate_lead", {
-			"currency": "EUR",
-			"value": includesPhone === "Yes" ? 5 : 1.5
-		});
-	}
+    const ADWORDS_GRANTS_ACCOUNT_ID = 961833097;
 
-	if (typeof (fbq) == "function" && cookieTrackingManager.canItrack("advertisement")) {
-		fbq('track', 'PageView');
-		fbq('track', 'Lead');
+    const EVENT_CATEGORY = "FrutaTemporada";
 
-		if (existingOrNew === 'New') {
-			fbq('track', 'Subscribe');
-		}
-	}
-	const adwordsEnhacedConversion = function (conversion_id) {
-		if (cookieTrackingManager.canItrack("advertisement")) {
-			gtag('js', new Date());
-			gtag('config', 'AW-' + conversion_id, { 'allow_enhanced_conversions': true });
-			window.userEmail = document.getElementById("email").value.trim();
-			window.userPhone = document.getElementById("phone_number").value.trim() ? String("+34" + document.getElementById("phone_number").value.trim()) : "";
-			gtag('set', 'user_data', {
-				"email": window.userEmail,
-				"phone_number": window.userPhone
-			});
-		}
-	};
-	adwordsEnhacedConversion(1053230267); // Display
+    const CONVERSION_LABEL_DISPLAY = "bRpeCJuYw_gCELuJnPYD";
 
-	const adwordsConversion = function (conversion_id, conversion_label) {
-		gtag('event', 'conversion', {
-			'send_to': 'AW-' + conversion_id + '/' + conversion_label,
-			'value': 1.00
-		});
-	};
+    const CONVERSION_LABEL_NEW_DISPLAY = "EhujCKmdw_gCELuJnPYD";
 
-	adwordsConversion(1053230267, "bRpeCJuYw_gCELuJnPYD"); // Display
+    const CONVERSION_LABEL_GRANTS = "mLMyCKatwvgCEInR0coD";
 
-	if (existingOrNew === 'New') {
-		adwordsConversion(1053230267, "EhujCKmdw_gCELuJnPYD"); // Nuevos display
-	}
+    /**
+     * On form start
+     */
+    let formAlreadyStarted = false;
+    document.addEventListener('form:click', function (e) {
+        if (!formAlreadyStarted) {
+            dataLayer.push({
+                'event': 'form_started',
+                'form_goal': FORM_GOAL,
+                'form_plugin': 'no_plugin',
+                'form_title': HUBSPOT_FORM_TITLE,
+                'form_id': HUBSPOT_FORM_ID,
+                'salesforce_campaign': SALESFORCE_CAMPAIGN
+            });
+        }
+        formAlreadyStarted = true;
+    });
 
-	adwordsConversion(961833097, "mLMyCKatwvgCEInR0coD"); // Grants
+    /**
+     * On form submit sucessfuly
+     */
+    document.addEventListener('form:submit', function (e) {
+        const existingOrNew = e.detail.was_contact ? 'Existing' : 'New';
 
-	const outbrainConversion = function (event) {
-		if (cookieTrackingManager.canItrack("advertisement")) {
-			if (typeof (obApi) == "function") {
-				obApi("track", event);
-			}
-		}
-	};
-	outbrainConversion("FIRMA");
+        let includesPhone;
+        if (document.getElementById("phone_number").value) {
+            includesPhone = "Yes";
+        } else {
+            includesPhone = "No";
+        }
 
-	// TODO Implement enhanced conversion using Tiktok
+        gtag("event", "Signup", {
+            "event_category": EVENT_CATEGORY,
+            "event_label": "?FIXME",
+            "value": 0,
+            "new_email": existingOrNew === "New" ? true : false,
+            "has_phone": includesPhone === "Yes" ? true : false,
+            "has_zip": false
+        });
 
-	const tiktokConversion = function (eventName, details = {}) {
-		if (cookieTrackingManager.canItrack("advertisement")) {
-			ttq.track(eventName, details);
-		}
-	};
-	tiktokConversion("CompleteRegistration");
+        if (cookieTrackingManager.canItrack("analytics") && cookieTrackingManager.canItrack("segmentation")) {
+            dataLayer.push({
+                'event': 'user_identified',
+                'distinct_id': sha256(document.querySelector("#email").value.trim().toLowerCase()),
+                'registration_type': 'Lead',
+                'consent_analytics': cookieTrackingManager.canItrack("analytics").toString().toUpperCase(),
+                'consent_segmentation': cookieTrackingManager.canItrack("segmentation").toString().toUpperCase(),
+                'consent_marketing': cookieTrackingManager.canItrack("advertisement").toString().toUpperCase(),
+                'user_type': 'profiled'
+            });
+        }
 
-	if (existingOrNew === "New") {
-		tiktokConversion("Subscribe");
-	}
+        // Sends form submit event to Mixpanel
+        dataLayer.push({
+            'event': 'form_submitted',
+            'form_goal': FORM_GOAL,
+            'form_plugin': 'none',
+            'form_title': HUBSPOT_FORM_TITLE,
+            'form_id': HUBSPOT_FORM_ID,
+            'salesforce_campaign': SALESFORCE_CAMPAIGN
+        });
 
-	const twitterConversion = function () {
-		if (typeof (twttr) == "object" && typeof (twttr.conversion.trackPid) == "function" && cookieTrackingManager.canItrack("advertisement")) {
-			twq('event', 'tw-nx9ab-ockx6', {
-			});
-		}
-	};
-	twitterConversion();
+        if (existingOrNew == "New") {
+            gtag('event', "generate_lead", {
+                "currency": "EUR",
+                "value": includesPhone === "Yes" ? 5 : 1.5
+            });
+        }
 
-});
+        if (typeof (fbq) == "function" && cookieTrackingManager.canItrack("advertisement")) {
+            fbq('track', 'PageView');
+            fbq('track', 'Lead');
 
-/**
- * On form does not submit to Hubspot
- */
-document.addEventListener('form:error', function (e) {
-	gtag("event", "exception", {
-		"description": "Could not send to Hubspot",
-		'fatal': false
-	});
-});
+            if (existingOrNew === 'New') {
+                fbq('track', 'Subscribe');
+            }
+        }
+        const adwordsEnhacedConversion = function (conversion_id) {
+            if (cookieTrackingManager.canItrack("advertisement")) {
+                gtag('js', new Date());
+                gtag('config', 'AW-' + conversion_id, { 'allow_enhanced_conversions': true });
+                window.userEmail = document.getElementById("email").value.trim().toLowerCase();
+                window.userPhone = document.getElementById("phone_number").value.trim() ? String("+34" + document.getElementById("phone_number").value.trim()) : "";
+                gtag('set', 'user_data', {
+                    "sha256_email_address": sha256(window.userEmail),
+                    "sha256_phone_number": sha256(window.userPhone)
+                });
+            }
+        };
+        adwordsEnhacedConversion(ADWORDS_ACCOUNT_ID);
 
-/**
- * If the page can track ads, fire Outbrain 15 segs after loading
- */
-document.addEventListener("DOMContentLoaded", function () {
-	if (document.location.href.includes("descarga") && cookieTrackingManager.canItrack('advertisement')) {
-		setTimeout(() => {
-			obApi('track', "15 sec on site");
-		}, 15000);
-	}
-});
+        const adwordsConversion = function (conversion_id, conversion_label) {
+            gtag('event', 'conversion', {
+                'send_to': 'AW-' + conversion_id + '/' + conversion_label,
+                'value': 1.00
+            });
+        };
 
-/**
- * Fire Outbrain 15 sec after cookie acceptance
- */
-const delayedOutbrain = function () {
-	setTimeout(() => {
-		if (cookieTrackingManager.canItrack('advertisement')) {
-			obApi('track', "15 sec on site");
-		}
-	}, 15000);
-};
+        adwordsConversion(ADWORDS_ACCOUNT_ID, CONVERSION_LABEL_DISPLAY);
 
-/**
- * On cookies accept
- */
-document.addEventListener('cookies:accept', function (e) {
-	gtag('event', 'Click', {
-		'event_label': 'Accept',
-		'event_category': 'CookiePrivacy',
-		'non_interaction': true
-	});
+        if (existingOrNew === 'New') {
+            adwordsConversion(ADWORDS_ACCOUNT_ID, CONVERSION_LABEL_NEW_DISPLAY);
+        }
 
-	cookieTrackingManager.writeEvent();
+        adwordsConversion(ADWORDS_GRANTS_ACCOUNT_ID, CONVERSION_LABEL_GRANTS);
 
-	if (document.location.href.includes("descarga")) {
-		delayedOutbrain();
-	}
-});
+        const outbrainConversion = function (event) {
+            if (cookieTrackingManager.canItrack("advertisement")) {
+                if (typeof (obApi) == "function") {
+                    obApi("track", event);
+                }
+            }
+        };
+        outbrainConversion("FIRMA");
 
-/**
- * On cookies config
- */
-document.addEventListener('cookies:config', function (e) {
-	gtag('event', 'Click', {
-		'event_label': 'Config',
-		'event_category': 'CookiePrivacy',
-		'non_interaction': true
-	});
+        // TODO Implement enhanced conversion using Tiktok
 
-});
+        const tiktokConversion = function (eventName, details = {}) {
+            if (cookieTrackingManager.canItrack("advertisement")) {
+                ttq.track(eventName, details);
+            }
+        };
+        tiktokConversion("CompleteRegistration");
 
-/**
- * On cookies check policy
- */
-document.addEventListener('cookies:checkpolicy', function (e) {
-	gtag('event', 'Click', {
-		'event_label': 'Check Policy',
-		'event_category': 'CookiePrivacy',
-		'non_interaction': true
-	});
-});
+        if (existingOrNew === "New") {
+            tiktokConversion("Subscribe");
+        }
 
-/**
- * On cookies accept all
- */
-document.addEventListener('cookies:acceptall', function (e) {
-	gtag('event', 'Click', {
-		'event_label': 'Accept all',
-		'event_category': 'CookiePrivacy',
-		'non_interaction': true
-	});
+        const twitterConversion = function () {
+            if (typeof (twttr) == "object" && typeof (twttr.conversion.trackPid) == "function" && cookieTrackingManager.canItrack("advertisement")) {
+                twq('event', 'tw-nx9ab-ockx6', {
+                });
+            }
+        };
+        twitterConversion();
 
-	cookieTrackingManager.writeEvent();
+    });
 
-	if (document.location.href.includes("descarga")) {
-		delayedOutbrain();
-	}
-});
+    /**
+     * On form does not submit to Hubspot
+     */
+    document.addEventListener('form:error', function (e) {
+        gtag("event", "exception", {
+            "description": "Could not send to Hubspot",
+            'fatal': false
+        });
+    });
 
-/**
- * On cookies deny all
- */
-document.addEventListener('cookies:denytall', function (e) {
-	gtag('event', 'Click', {
-		'event_label': 'Deny all',
-		'event_category': 'CookiePrivacy',
-		'non_interaction': true
-	});
+    /**
+     * If the page can track ads, fire Outbrain 15 segs after loading
+     */
+    document.addEventListener("DOMContentLoaded", function () {
+        if (document.location.href.includes("descarga") && cookieTrackingManager.canItrack('advertisement')) {
+            setTimeout(() => {
+                obApi('track', "15 sec on site");
+            }, 15000);
+        }
+    });
 
-	cookieTrackingManager.writeEvent();
-});
+    /**
+     * Fire Outbrain 15 sec after cookie acceptance
+     */
+    const delayedOutbrain = function () {
+        setTimeout(() => {
+            if (cookieTrackingManager.canItrack('advertisement')) {
+                obApi('track', "15 sec on site");
+            }
+        }, 15000);
+    };
 
-/**
- * On cookies OK
- */
-document.addEventListener('cookies:ok', function (e) {
-	gtag('event', 'Click', {
-		'event_label': 'OK ' + String(cookieTrackingManager.consent.cats.analytics) + ',' + String(cookieTrackingManager.consent.cats.segmentation) + ',' + String(cookieTrackingManager.consent.cats.advertisement),
-		'event_category': 'CookiePrivacy',
-		'non_interaction': true
-	});
+    /**
+     * On cookies accept
+     */
+    document.addEventListener('cookies:accept', function (e) {
+        gtag('event', 'Click', {
+            'event_label': 'Accept',
+            'event_category': 'CookiePrivacy',
+            'non_interaction': true
+        });
 
-	cookieTrackingManager.writeEvent();
-	
-	if (document.location.href.includes("descarga")) {
-		delayedOutbrain();
-	}
-});
+        cookieTrackingManager.writeEvent();
 
-/**
- * On clics in thank you buttons
- */
-document.addEventListener('thankyou:buttons', function (e) {
+        if (document.location.href.includes("descarga")) {
+            delayedOutbrain();
+        }
+    });
 
-	const clickedButton = e.detail.button;
+    /**
+     * On cookies config
+     */
+    document.addEventListener('cookies:config', function (e) {
+        gtag('event', 'Click', {
+            'event_label': 'Config',
+            'event_category': 'CookiePrivacy',
+            'non_interaction': true
+        });
 
-	gtag("event", "click", {
-		'event_category': "FrutaTemporada",
-		'event_label': clickedButton,
-		'value': 0
-	});
+    });
 
-	// console.log("click", e.detail);
+    /**
+     * On cookies check policy
+     */
+    document.addEventListener('cookies:checkpolicy', function (e) {
+        gtag('event', 'Click', {
+            'event_label': 'Check Policy',
+            'event_category': 'CookiePrivacy',
+            'non_interaction': true
+        });
+    });
 
-});
+    /**
+     * On cookies accept all
+     */
+    document.addEventListener('cookies:acceptall', function (e) {
+        gtag('event', 'Click', {
+            'event_label': 'Accept all',
+            'event_category': 'CookiePrivacy',
+            'non_interaction': true
+        });
 
-/**
- * On clics in thank you buttons, new
- *  $dispatch('thankyou:share', { method: 'Facebook' });
- *  $dispatch('thankyou:share', { method: 'Whatsapp' });
- *  $dispatch('thankyou:share', { method: 'Twitter' });
- */
-document.addEventListener('thankyou:share', function (e) {
+        cookieTrackingManager.writeEvent();
 
-	gtag("event", "share", {
-		"method": e.detail.method
-	});
+        if (document.location.href.includes("descarga")) {
+            delayedOutbrain();
+        }
+    });
 
-	dataLayer.push({
-		'event': 'page_shared',
-		'channel': e.detail.method
-	});
+    /**
+     * On cookies deny all
+     */
+    document.addEventListener('cookies:denytall', function (e) {
+        gtag('event', 'Click', {
+            'event_label': 'Deny all',
+            'event_category': 'CookiePrivacy',
+            'non_interaction': true
+        });
 
-	// console.log("share", e.detail);
+        cookieTrackingManager.writeEvent();
+    });
 
-});
+    /**
+     * On cookies OK
+     */
+    document.addEventListener('cookies:ok', function (e) {
+        gtag('event', 'Click', {
+            'event_label': 'OK ' + String(cookieTrackingManager.consent.cats.analytics) + ',' + String(cookieTrackingManager.consent.cats.segmentation) + ',' + String(cookieTrackingManager.consent.cats.advertisement),
+            'event_category': 'CookiePrivacy',
+            'non_interaction': true
+        });
 
-/**
- * On clics in end of the page buttons
- */
-document.addEventListener('button:end_page', function (e) {
+        cookieTrackingManager.writeEvent();
 
-	const clickedButton = e.detail.button;
+        if (document.location.href.includes("descarga")) {
+            delayedOutbrain();
+        }
+    });
 
-	gtag("event", "Click", {
-		'event_category': "FrutaTemporada",
-		'event_label': clickedButton,
-		'value': 0
-	});
+    /**
+     * On clics in thank you buttons
+     */
+    document.addEventListener('thankyou:buttons', function (e) {
 
-});
+        const clickedButton = e.detail.button;
+
+        gtag("event", "click", {
+            'event_category': EVENT_CATEGORY,
+            'event_label': clickedButton,
+            'value': 0
+        });
+
+    });
+
+    /**
+     * On clics in thank you buttons, new
+     *  $dispatch('thankyou:share', { method: 'Facebook' });
+     *  $dispatch('thankyou:share', { method: 'Whatsapp' });
+     *  $dispatch('thankyou:share', { method: 'Twitter' });
+     */
+    document.addEventListener('thankyou:share', function (e) {
+
+        gtag("event", "share", {
+            "method": e.detail.method
+        });
+
+        dataLayer.push({
+            'event': 'page_shared',
+            'channel': e.detail.method
+        });
+
+    });
+
+    /**
+     * On clics in end of the page buttons
+     */
+    document.addEventListener('button:end_page', function (e) {
+
+        const clickedButton = e.detail.button;
+
+        gtag("event", "Click", {
+            'event_category': EVENT_CATEGORY,
+            'event_label': clickedButton,
+            'value': 0
+        });
+
+    });
+
+}
