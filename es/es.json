@@ -6,16 +6,13 @@
         "Descripción calendario de frutas y legumbres de temporada"
     ],
     "privacy_policy_url": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
-
     "top_menu" : [
-
         {
             "id" : "m0",
             "text" : "Home",
             "external" : false,
             "url" : "/"
         },
-
         {
             "id" : "m1",
             "text" : "Calendario",
@@ -28,11 +25,8 @@
             "external" : true,
             "url" : "https://es.greenpeace.org/es/noticias/"
         }
-
     ],
-
     "mobile_menu" : "Menu",
-
     "form": {
         "label_first_name": "Nombre",
         "label_last_name": "Apellidos",
