@@ -1,0 +1,182 @@
+<form id="signup" class="form" novalidate x-on:submit.prevent="" x-init="populate_utms()" x-data="{
+                values : {
+                    utm_medium: '',
+                    utm_source: '',
+                    utm_campaign: '',
+                    utm_content: '',
+                    utm_term: '',
+                    gclid: '',
+                    ip: '',
+                    uagent: '',
+                    hs_language: '{{ locale }}',
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    id_number: '',
+                    phone_number: '',
+                    privacy: false,
+                    is_contact: false,
+                },
+                show_errors: false,
+                errors: { 
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    id_number: '',
+                    phone_number: '',
+                    privacy: '',
+                    form_sent: ''
+                },
+                async populate_utms(){
+                    const utmValues = await stringParams();
+                    this.values.utm_medium = utmValues.utm_medium;
+                    this.values.utm_source = utmValues.utm_source;
+                    this.values.utm_campaign = utmValues.utm_campaign;
+                    this.values.utm_content = utmValues.utm_content;
+                    this.values.utm_term = utmValues.utm_term;
+                    this.values.gclid = utmValues.gclid;
+                }, 
+                validate(){
+                    this.required('first_name');
+                    this.required('last_name');
+                    this.is_required_email('email');
+                    /* this.is_required_id_number('id_number'); */
+                    this.is_required_phone('phone_number');
+                    this.is_checked('privacy');
+                },
+                is_valid(){
+                    let valid = true;
+                    for ( const i in this.errors ){
+                        if ( this.errors[i] != ''){
+                            valid = false;
+                        }
+                    }
+                    return valid;
+                },
+                async submit_form(){
+                    this.errors.form_sent = 'Yes';
+                    const answer = await sendToHubspot(this.values);
+                    if (answer) {
+                        document.getElementById('main').style.display = 'none';
+                        document.getElementById('main').setAttribute('aria-hidden', 'true');
+                        document.getElementById('thankspages').style.display = 'flex';
+                        document.getElementById('thankspages').removeAttribute('aria-hidden')
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                },
+                async is_new_email(){
+                    if ( this.errors.email ==='' ){
+                        const rawResponse = await fetch('https://apis.greenpeace.es/email-info/?' + new URLSearchParams({
+                            email: this.values.email
+                        }));
+                        const content = await rawResponse.json();
+                        this.values.is_contact = content.is_contact;
+                    } else {
+                        this.values.is_contact = false;
+                        await console.log('Invalid email');
+                    }
+                },
+                required(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = '{{ form.error_required }}';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                },
+                is_required_email(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = '{{ form.error_required }}';
+                    } else if ( !isValidEmail(this.values[field_name] ) ) {
+                        this.errors[field_name] = '{{ form.error_email }}';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                },
+                is_required_phone(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = '{{ form.error_required }}';
+                    } else if ( this.values[field_name].trim().length >= 1 && !isValidPhone( this.values[field_name] )) {
+                        this.errors[field_name] = '{{ form.error_phone }}';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                },
+                /* is_required_id_number(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = '{{ form.error_required }}';
+                    } else if ( !isValidIdNumber( this.values[field_name]) ){
+                        this.errors[field_name] = '{{ form.error_id_number }}';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                }, */
+                is_checked(field_name) {
+                    if ( this.values[field_name] === false ) {
+                        this.errors[field_name] = '{{ form.error_privacy }}';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                }
+            }">
+    <input type="hidden" name="utm_medium" id="utm_medium" x-model="values.utm_medium"/>
+    <input type="hidden" name="utm_source" id="utm_source" x-model="values.utm_source"/>
+    <input type="hidden" name="utm_campaign" id="utm_campaign" x-model="values.utm_campaign"/>
+    <input type="hidden" name="utm_content" id="utm_content" x-model="values.utm_content"/>
+    <input type="hidden" name="utm_term" id="utm_term" x-model="values.utm_term"/>
+    <input type="hidden" name="en_txn6" id="gclid" x-model="values.gclid"/>
+    <input type="hidden" name="en_txn7" id="ip" x-model="values.ip"/>
+    <input type="hidden" name="en_txn8" id="uagent" x-model="values.uagent"/>
+    <input type="hidden" name="last_abtest_variant" id="last_abtest_variant" value=""/>
+    <input type="hidden" name="hs_language" id="hs_language" x-model="values.hs_language" value="{{ locale }}"/>
+    <div class="form-group">
+        <label for="first_name" class="d-none">{{ form.label_first_name }}
+            <sup title="{{ form.required }}">*</sup>
+        </label>
+        <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="{{ form.label_first_name }} *" x-model="values.first_name" x-on:input="required('first_name'); $store.fname = $el.value" x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.first_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <div class="form-group">
+        <label for="last_name" class="d-none">{{ form.label_last_name }}
+            <sup title="{{ form.required }}">*</sup>
+        </label>
+        <input type="text" class="form-control" id="last_name" name="last_name" required="required" maxlength="40" autocomplete="family-name" placeholder="{{ form.label_last_name }} *" x-model="values.last_name" x-on:input="required('last_name')" x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.last_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="d-none">{{ form.label_email }}
+            <sup title="{{ form.required }}">*</sup>
+        </label>
+        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="{{ form.label_email }} *" x-model="values.email" x-on:input="is_required_email('email'); $store.email = $el.value" x-on:change="is_new_email()"  x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.email" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <!--<div class="form-group">
+                    <label for="id_number" class="d-none">{{ form.label_id_number }} <sup title="{{ form.required }}">*</sup> <span class="sr-only">{{ form.example_id_number }}</span></label>
+                    <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="{{ form.label_id_number }}" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" />
+                    <div class="error-message" x-text="errors.id_number"  x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+                </div> -->
+    <div class="form-group">
+        <label for="phone_number" class="d-none">{{ form.label_phone_number }}
+            <sup title="{{ form.required }}">*</sup>
+            <span class="sr-only">{{ form.example_phone_number }}</span></label>
+        <input type="tel" class="form-control" id="phone_number" name="phone_number" maxlength="15" autocomplete="tel-national" required="required" placeholder="{{ form.label_phone_number }} *" x-model="values.phone_number" x-on:input="is_required_phone('phone_number')" x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.phone_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <div class="privacynotice">
+        {% for line in form.privacy_policy %}
+            {{ line | safe }}
+        {% endfor %}
+    </div>
+    <div class="privacycontainer">
+        <label for="privacy">
+            <input type="checkbox" id="privacy" name="privacy" value="Y" required="required" x-model="values.privacy" x-on:change="is_checked('privacy')"/>
+            <span id="iaccept">{{ form.label_accept_privacy }}
+                <sup title="{{ form.required }}">*</sup>
+            </span>
+            <div class="error-message" x-text="errors.privacy"  x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+        </label>
+    </div>
+    <div class="buttoncontainer">
+        <button type="submit" class="colored-button" x-on:click="show_errors = true; validate(); is_valid() && submit_form()">
+            {{ form.send_button }} » </button>
+    </div>
+</form>

@@ -41,6 +41,10 @@ body {
     border: 0;
 }
 
+.d-none {
+    display: none;
+}
+
 h1,
 h2,
 h3,

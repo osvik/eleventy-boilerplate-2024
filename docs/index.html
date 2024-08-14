@@ -158,6 +158,7 @@
             
             
                 <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/global.js" defer="defer"></script>
+                <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/form.js" defer="defer"></script>
                 <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/persist.min.js" defer="defer"></script>
                 <script src="https://osvik.github.io/eleventy-boilerplate-2024/assets/js/alpine3-14-1.min.js" defer="defer"></script>
             
@@ -200,7 +201,7 @@
 
             
 
-            <main>
+            <main id="main">
 
                 
                     <section class="openspace">
@@ -213,6 +214,192 @@
                     <section class="content1">
                         <h2>Content</h2> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+
+                        <form id="signup" class="form" novalidate x-on:submit.prevent="" x-init="populate_utms()" x-data="{
+                values : {
+                    utm_medium: '',
+                    utm_source: '',
+                    utm_campaign: '',
+                    utm_content: '',
+                    utm_term: '',
+                    gclid: '',
+                    ip: '',
+                    uagent: '',
+                    hs_language: '',
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    id_number: '',
+                    phone_number: '',
+                    privacy: false,
+                    is_contact: false,
+                },
+                show_errors: false,
+                errors: { 
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    id_number: '',
+                    phone_number: '',
+                    privacy: '',
+                    form_sent: ''
+                },
+                async populate_utms(){
+                    const utmValues = await stringParams();
+                    this.values.utm_medium = utmValues.utm_medium;
+                    this.values.utm_source = utmValues.utm_source;
+                    this.values.utm_campaign = utmValues.utm_campaign;
+                    this.values.utm_content = utmValues.utm_content;
+                    this.values.utm_term = utmValues.utm_term;
+                    this.values.gclid = utmValues.gclid;
+                }, 
+                validate(){
+                    this.required('first_name');
+                    this.required('last_name');
+                    this.is_required_email('email');
+                    /* this.is_required_id_number('id_number'); */
+                    this.is_required_phone('phone_number');
+                    this.is_checked('privacy');
+                },
+                is_valid(){
+                    let valid = true;
+                    for ( const i in this.errors ){
+                        if ( this.errors[i] != ''){
+                            valid = false;
+                        }
+                    }
+                    return valid;
+                },
+                async submit_form(){
+                    this.errors.form_sent = 'Yes';
+                    const answer = await sendToHubspot(this.values);
+                    if (answer) {
+                        document.getElementById('main').style.display = 'none';
+                        document.getElementById('main').setAttribute('aria-hidden', 'true');
+                        document.getElementById('thankspages').style.display = 'flex';
+                        document.getElementById('thankspages').removeAttribute('aria-hidden')
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                },
+                async is_new_email(){
+                    if ( this.errors.email ==='' ){
+                        const rawResponse = await fetch('https://apis.greenpeace.es/email-info/?' + new URLSearchParams({
+                            email: this.values.email
+                        }));
+                        const content = await rawResponse.json();
+                        this.values.is_contact = content.is_contact;
+                    } else {
+                        this.values.is_contact = false;
+                        await console.log('Invalid email');
+                    }
+                },
+                required(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = 'Campo obligatorio';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                },
+                is_required_email(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = 'Campo obligatorio';
+                    } else if ( !isValidEmail(this.values[field_name] ) ) {
+                        this.errors[field_name] = 'Un email válido por favor, ej. nombre@dominio.tld';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                },
+                is_required_phone(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = 'Campo obligatorio';
+                    } else if ( this.values[field_name].trim().length >= 1 && !isValidPhone( this.values[field_name] )) {
+                        this.errors[field_name] = 'Tu número de teléfono español por favor';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                },
+                /* is_required_id_number(field_name) {
+                    if ( this.values[field_name].trim().length < 2) {
+                        this.errors[field_name] = 'Campo obligatorio';
+                    } else if ( !isValidIdNumber( this.values[field_name]) ){
+                        this.errors[field_name] = 'Un DNI o NIE españoles. Por ejemplo 82451384H o X6909535J.';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                }, */
+                is_checked(field_name) {
+                    if ( this.values[field_name] === false ) {
+                        this.errors[field_name] = 'Falta aceptar la política de privacidad';
+                    } else {
+                        this.errors[field_name] = '';
+                    }
+                }
+            }">
+    <input type="hidden" name="utm_medium" id="utm_medium" x-model="values.utm_medium"/>
+    <input type="hidden" name="utm_source" id="utm_source" x-model="values.utm_source"/>
+    <input type="hidden" name="utm_campaign" id="utm_campaign" x-model="values.utm_campaign"/>
+    <input type="hidden" name="utm_content" id="utm_content" x-model="values.utm_content"/>
+    <input type="hidden" name="utm_term" id="utm_term" x-model="values.utm_term"/>
+    <input type="hidden" name="en_txn6" id="gclid" x-model="values.gclid"/>
+    <input type="hidden" name="en_txn7" id="ip" x-model="values.ip"/>
+    <input type="hidden" name="en_txn8" id="uagent" x-model="values.uagent"/>
+    <input type="hidden" name="last_abtest_variant" id="last_abtest_variant" value=""/>
+    <input type="hidden" name="hs_language" id="hs_language" x-model="values.hs_language" value=""/>
+    <div class="form-group">
+        <label for="first_name" class="d-none">Nombre
+            <sup title="Campo obligatório">*</sup>
+        </label>
+        <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="Nombre *" x-model="values.first_name" x-on:input="required('first_name'); $store.fname = $el.value" x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.first_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <div class="form-group">
+        <label for="last_name" class="d-none">Apellidos
+            <sup title="Campo obligatório">*</sup>
+        </label>
+        <input type="text" class="form-control" id="last_name" name="last_name" required="required" maxlength="40" autocomplete="family-name" placeholder="Apellidos *" x-model="values.last_name" x-on:input="required('last_name')" x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.last_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="d-none">Email
+            <sup title="Campo obligatório">*</sup>
+        </label>
+        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="Email *" x-model="values.email" x-on:input="is_required_email('email'); $store.email = $el.value" x-on:change="is_new_email()"  x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.email" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <!--<div class="form-group">
+                    <label for="id_number" class="d-none">DNI o NIE <sup title="Campo obligatório">*</sup> <span class="sr-only">Ej 1234567x o y1234567x</span></label>
+                    <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="DNI o NIE" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" />
+                    <div class="error-message" x-text="errors.id_number"  x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+                </div> -->
+    <div class="form-group">
+        <label for="phone_number" class="d-none">Teléfono
+            <sup title="Campo obligatório">*</sup>
+            <span class="sr-only">Ej. 623456789</span></label>
+        <input type="tel" class="form-control" id="phone_number" name="phone_number" maxlength="15" autocomplete="tel-national" required="required" placeholder="Teléfono *" x-model="values.phone_number" x-on:input="is_required_phone('phone_number')" x-on:click="$dispatch('form:click');"/>
+        <div class="error-message" x-text="errors.phone_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+    </div>
+    <div class="privacynotice">
+        
+            <p><strong>Política de privacidad</strong></p>
+        
+            <p data-nosnippet="true">Quiero recibir información acerca de las campañas de Greenpeace y formas de participación. Al firmar, acepto la política de privacidad. Desde GREENPEACE ESPAÑA trataremos los datos aportados en calidad de Responsable del tratamiento con la finalidad de gestionar nuestra relación contigo, en pro de nuestros objetivos fundacionales, en base al consentimiento o a la ejecución de un acuerdo. Puedes ejercer tus derechos enviando un email a contacto.es@greenpeace.org con el asunto “Protección de Datos”. <a target="_blank" href="https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/" class="privacy_policy_link_form">Más información.</a></p>
+        
+    </div>
+    <div class="privacycontainer">
+        <label for="privacy">
+            <input type="checkbox" id="privacy" name="privacy" value="Y" required="required" x-model="values.privacy" x-on:change="is_checked('privacy')"/>
+            <span id="iaccept">Acepto la política de privacidad
+                <sup title="Campo obligatório">*</sup>
+            </span>
+            <div class="error-message" x-text="errors.privacy"  x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+        </label>
+    </div>
+    <div class="buttoncontainer">
+        <button type="submit" class="colored-button" x-on:click="show_errors = true; validate(); is_valid() && submit_form()">
+            Quiero mi guÍa » </button>
+    </div>
+</form>
+                        
                     </section>
                 
 
@@ -224,6 +411,53 @@
                 
 
             </main>
+
+            <div id="thankspages" x-data="{ screen: 'thankyoupage'}" style="display:none;" aria-hidden="true">
+
+    <section id="thankyoupage" x-show="screen === 'thankyoupage'" x-bind:aria-hidden="not(screen === 'thankyoupage')" x-transition.opacity.duration.200ms>
+        <h2>Disfruta tu guía, <span x-text="$store.fname"></span></h2> <p><span style="font-size: larger;">Ya te hemos enviado la guía a <span x-text="$store.email"></span>.</span><br /><br /><span style="font-size: smaller;">Revisa tus bandejas de entrada para empezar a consumir mejor. Si no encuentras la guía o has tenido algún problema para descargarla, escríbenos a <a href="mailto:contacto.es@greenpeace.org" target="_blank" rel="noopener">contacto.es@greenpeace.org</a></span></p> <p>¿Quieres compartirla con tus contactos? Así les ayudarás a que ellos también puedan consumir mejor.</p>
+
+        <button type="button" class="colored-button" x-on:click="screen = 'sharepage'; $dispatch('thankyou:buttons', { button: 'yes_to_share' });">Si</button>
+        <button type="button" class="colored-button" x-on:click="screen = 'givepage'; $dispatch('thankyou:buttons', { button: 'no_to_share' });">No</button>
+    </section>
+
+    <section id="sharepage" x-show="screen === 'sharepage'" x-bind:aria-hidden="not(screen === 'sharepage')" x-transition.opacity.duration.200ms>
+        <h2>Comparte esta guía</h2> <p>Ayuda a otra gente a consumir mejor</p>
+
+        <div class="thankyoubuttons">
+            <a href="http://www.facebook.com/sharer.php?u=https://osvik.github.io" target="_blank" x-on:click="$dispatch('thankyou:share', { method: 'Facebook' });" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="45" height="51" id="facebookIcon">
+                    <title>Facebook</title>
+                    <path fill="#4267B2"
+                                d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"/>
+                </svg>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=undefined https://osvik.github.ioundefined%3Futm_source%3Dtwitter%26utm_medium%3Dsocial_network_link%26utm_campaign%3DFrutadetemporada&amp;source=webclient" target="_blank" x-on:click="$dispatch('thankyou:share', { method: 'Twitter' });" aria-label="Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="45" height="51" id="twitterIcon">
+                    <title>Twitter</title>
+                    <path fill="#1DA1F2"
+                                d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2A65.6 65.6 0 0 1 77 218.2v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.45 65.45 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z"/>
+                </svg>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=undefined https://osvik.github.ioundefined%3Futm_source%3Dwhatsapp%26utm_medium%3Dsocial_network_link%26utm_campaign%3DFrutadetemporada" target="_blank" x-on:click="$dispatch('thankyou:share', { method: 'Whatsapp' });" aria-label="Whatsapp">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="45" height="51" id="whatsappIcon">
+                    <title>Whatsapp</title>
+                    <path fill="#25D366"
+                                d="M224 122.8c-72.7 0-131.8 59.1-131.9 131.8 0 24.9 7 49.2 20.2 70.1l3.1 5-13.3 48.6 49.9-13.1 4.8 2.9c20.2 12 43.4 18.4 67.1 18.4h.1c72.6 0 133.3-59.1 133.3-131.8 0-35.2-15.2-68.3-40.1-93.2-25-25-58-38.7-93.2-38.7zm77.5 188.4c-3.3 9.3-19.1 17.7-26.7 18.8-12.6 1.9-22.4.9-47.5-9.9-39.7-17.2-65.7-57.2-67.7-59.8-2-2.6-16.2-21.5-16.2-41s10.2-29.1 13.9-33.1c3.6-4 7.9-5 10.6-5 2.6 0 5.3 0 7.6.1 2.4.1 5.7-.9 8.9 6.8 3.3 7.9 11.2 27.4 12.2 29.4s1.7 4.3.3 6.9c-7.6 15.2-15.7 14.6-11.6 21.6 15.3 26.3 30.6 35.4 53.9 47.1 4 2 6.3 1.7 8.6-1 2.3-2.6 9.9-11.6 12.5-15.5 2.6-4 5.3-3.3 8.9-2 3.6 1.3 23.1 10.9 27.1 12.9s6.6 3 7.6 4.6c.9 1.9.9 9.9-2.4 19.1zM400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM223.9 413.2c-26.6 0-52.7-6.7-75.8-19.3L64 416l22.5-82.2c-13.9-24-21.2-51.3-21.2-79.3C65.4 167.1 136.5 96 223.9 96c42.4 0 82.2 16.5 112.2 46.5 29.9 30 47.9 69.8 47.9 112.2 0 87.4-72.7 158.5-160.1 158.5z"/>
+                </svg>
+            </a>
+        </div>
+        <button type="button" class="colored-button" x-on:click="screen = 'givepage'; $dispatch('thankyou:buttons', { button: 'skip_to_donations' });" >Saltar »</button>
+    </section>
+
+    <section id="givepage" x-show="screen === 'givepage'" x-bind:aria-hidden="not(screen === 'givepage')" x-transition.opacity.duration.200ms>
+        
+        <div style="margin: 25px 0;">
+            <a href="" class="colored-button" x-on:click.prevent="$dispatch('thankyou:buttons', { button: 'yes_to_give' }); await delay(1000); window.location.href = $el.getAttribute('href');">Hazte socio/a</a>
+        </div>
+    </section>
+
+</div>
 
             
                 <footer>

@@ -19,6 +19,7 @@
             {% endblock %}
             {% block scripts %}
                 <script src="{{ site.assets}}/js/global.js" defer="defer"></script>
+                <script src="{{ site.assets}}/js/form.js" defer="defer"></script>
                 <script src="{{ site.assets}}/js/persist.min.js" defer="defer"></script>
                 <script src="{{ site.assets}}/js/alpine3-14-1.min.js" defer="defer"></script>
             {% endblock %}
@@ -31,7 +32,7 @@
                 {% include "topmenu.njk" %}
             {% endblock %}
 
-            <main>
+            <main id="main">
 
                 {% block openspace %}
                     <section class="openspace">
@@ -42,6 +43,9 @@
                 {% block content1 %}
                     <section class="content1">
                         {{ content_1 | safe }}
+
+                        {% include "form.njk" %}
+                        
                     </section>
                 {% endblock %}
 
@@ -52,6 +56,8 @@
                 {% endblock %}
 
             </main>
+
+            {% include "form-thank-you.njk" %}
 
             {% block footer %}
                 {% include "footer.njk" %}
