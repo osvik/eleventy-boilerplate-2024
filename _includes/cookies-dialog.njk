@@ -1,7 +1,7 @@
 <!-- Modal cookies -->
-<div class="modal" x-cloak x-show="showModal" :class="{ 'modal-visible-overflow': showModal }">
+<div class="modal" x-cloak x-show="showModal" :class="{ 'modal-visible-overflow': showModal }" x-bind:aria-hidden="not(showModal)">
 
-    <div class="modal-inside" x-show="showModal" x-data="{ 
+    <div class="modal-inside" x-show="showModal" x-bind:aria-hidden="not(showModal)" x-data="{ 
                 modalDialog: 1,
                 init(){
                     cookieTrackingManager.read();

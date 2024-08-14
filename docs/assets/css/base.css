@@ -50,6 +50,36 @@ h4 {
     font-weight: var(--bold-font-weight);
 }
 
+/* ACESSIBILITY */
+
+@media (prefers-contrast: more) {
+
+    :root {
+        --text-color: #000000;
+        --second-bg-color: #fcfcfc;
+        --third-bg-color: #0b2402;
+        --links-color: #08015a;
+        --links-hover: #4e2113;
+        
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    .modal-bt-row .popup-no {
+        background: none;
+        border: 1px solid var(--text-color);
+    }
+
+}
+
+@media (forced-colors: active) {
+    footer, footer a {
+        color: var(--text-color);
+    }
+}
+
 /* PRINT */
 
 @media print {
