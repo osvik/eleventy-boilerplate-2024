@@ -442,6 +442,10 @@ footer li {
  * Form
  */
 
+:root {
+    --button-thank-you-background: #ffe100;
+}
+
 #signup {
     max-width: 100%;
 }
@@ -521,8 +525,19 @@ input[type=text], input[type=email], input[type=tel] {
 
 a.colored-button {
     margin: 10px 0;
+    background-color: var(--button-thank-you-background);
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
 }
 
+button.colored-button {
+    background-color: var(--button-thank-you-background);
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+}
 
 /**
  * Fonts
