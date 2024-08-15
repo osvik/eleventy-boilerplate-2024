@@ -2,8 +2,10 @@
 
     <section id="thankyoupage" x-show="screen === 'thankyoupage'" x-bind:aria-hidden="not(screen === 'thankyoupage')" x-transition.opacity.duration.200ms>
         {{ thank_you_screen | safe }}
-        <button type="button" class="colored-button" x-on:click="screen = 'sharepage'; $dispatch('thankyou:buttons', { button: 'yes_to_share' });">{{ form.yes }}</button>
-        <button type="button" class="colored-button" x-on:click="screen = 'givepage'; $dispatch('thankyou:buttons', { button: 'no_to_share' });">{{ form.no }}</button>
+        <div class="rowbuttons">
+            <button type="button" class="colored-button" x-on:click="screen = 'sharepage'; $dispatch('thankyou:buttons', { button: 'yes_to_share' });">&nbsp; {{ form.yes }} &nbsp;</button>
+            <button type="button" class="colored-button" x-on:click="screen = 'givepage'; $dispatch('thankyou:buttons', { button: 'no_to_share' });">&nbsp; {{ form.no }} &nbsp;</button>
+        <div>
     </section>
 
     <section id="sharepage" x-show="screen === 'sharepage'" x-bind:aria-hidden="not(screen === 'sharepage')" x-transition.opacity.duration.200ms>

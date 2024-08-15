@@ -456,7 +456,7 @@ footer li {
 }
 
 input {
-    background-color: var( --second-color);
+    background-color: var(--second-color);
     border: 1px solid #ced4da;
     padding: .5rem 1rem;
     font-family: var(--regular-font);
@@ -464,10 +464,12 @@ input {
     border-radius: 8px;
 }
 
-input[type=text], input[type=email], input[type=tel] {
+input[type=text],
+input[type=email],
+input[type=tel] {
     box-sizing: border-box;
     width: 100%;
-}  
+}
 
 .form-group {
     margin-bottom: 10px;
@@ -476,6 +478,7 @@ input[type=text], input[type=email], input[type=tel] {
 .privacynotice {
     font-size: 85%;
 }
+
 .privacycontainer {
     margin-bottom: 1rem;
 }
@@ -493,16 +496,22 @@ input[type=text], input[type=email], input[type=tel] {
  */
 
 #thankspages {
-    height: 90vh; 
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#thankspages > section {
+#thankspages>section {
     text-align: center;
     max-width: 500px;
     padding: 8px;
+}
+
+.rowbuttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 #thankyoupage .colored-button:nth-child(3) {
@@ -519,7 +528,7 @@ input[type=text], input[type=email], input[type=tel] {
     justify-content: center;
 }
 
-.thankyoubuttons a { 
+.thankyoubuttons a {
     padding: 15px;
 }
 

@@ -415,8 +415,10 @@
     <section id="thankyoupage" x-show="screen === 'thankyoupage'" x-bind:aria-hidden="not(screen === 'thankyoupage')" x-transition.opacity.duration.200ms>
         <h2>Disfruta tu guía, <span x-text="$store.fname"></span></h2> <p><span style="font-size: larger;">Ya te hemos enviado la guía a <span x-text="$store.email"></span>.</span><br /><br /><span style="font-size: smaller;">Revisa tus bandejas de entrada para empezar a consumir mejor. Si no encuentras la guía o has tenido algún problema para descargarla, escríbenos a <a href="mailto:contacto.es@greenpeace.org" target="_blank" rel="noopener">contacto.es@greenpeace.org</a></span></p> <p>¿Quieres compartirla con tus contactos? Así les ayudarás a que ellos también puedan consumir mejor.</p>
 
-        <button type="button" class="colored-button" x-on:click="screen = 'sharepage'; $dispatch('thankyou:buttons', { button: 'yes_to_share' });">Si</button>
-        <button type="button" class="colored-button" x-on:click="screen = 'givepage'; $dispatch('thankyou:buttons', { button: 'no_to_share' });">No</button>
+        <div class="rowbuttons">
+            <button type="button" class="colored-button" x-on:click="screen = 'sharepage'; $dispatch('thankyou:buttons', { button: 'yes_to_share' });">&nbsp; Si &nbsp;</button>
+            <button type="button" class="colored-button" x-on:click="screen = 'givepage'; $dispatch('thankyou:buttons', { button: 'no_to_share' });">&nbsp; No &nbsp;</button>
+        <div>
     </section>
 
     <section id="sharepage" x-show="screen === 'sharepage'" x-bind:aria-hidden="not(screen === 'sharepage')" x-transition.opacity.duration.200ms>
