@@ -2,6 +2,12 @@
 
 /* FORM FUNCIONS */
 
+const SALESFORCE_CAMPAIGN = "70108000000iSckAAE";
+
+const HUBSPOT_FORM_ID = "0a6163f6-f99b-489a-821a-b0ebbf6dd284";
+
+const EVENT_CATEGORY = "FrutaTemporada";
+
 /**
  * Parse the utms and Adwords gclid
  * @returns {object}
@@ -30,7 +36,7 @@ async function stringParams() {
     }
 
     if ( paramsObj.gclid !== "" && paramsObj.utm_campaign === "") {
-        paramsObj.utm_campaign = "FrutaTemporada";
+        paramsObj.utm_campaign = EVENT_CATEGORY;
     }
 
     if ( ["adwords", "google"].includes(paramsObj.utm_source) && ["ppc", "cpc"].includes(paramsObj.utm_medium) ) {
@@ -214,9 +220,7 @@ async function sendToHubspot(formValues) {
     const id_number = formValues.id_number.replace(/[\.\s-,_\|#]/g, '').toUpperCase();
     const phone = formValues.phone_number.replace(/[\.\s-,_\|#]/g, '');
 
-    const salesforce_campaign = "70108000000iSckAAE"; // api_forms_hubspot_salesforce_campaign_id // Fruta de temporada
-    const api_forms_hubspot_formId = "0a6163f6-f99b-489a-821a-b0ebbf6dd284"; // Fruta de temporada
-    const postURL = "https://api.hsforms.com/submissions/v3/integration/submit/5361482/" + api_forms_hubspot_formId;
+    const postURL = "https://api.hsforms.com/submissions/v3/integration/submit/5361482/" + HUBSPOT_FORM_ID;
 
     const data = JSON.stringify({
         "fields": [{
@@ -288,7 +292,7 @@ async function sendToHubspot(formValues) {
             "hutk": cookie_read("hubspotutk"),
             "pageUri": document.location.href,
             "pageName": document.title,
-            "sfdcCampaignId": salesforce_campaign
+            "sfdcCampaignId": SALESFORCE_CAMPAIGN
         }
     });
 
