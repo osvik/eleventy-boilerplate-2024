@@ -2,12 +2,6 @@
 
 /* FORM FUNCIONS */
 
-const SALESFORCE_CAMPAIGN = "70108000000iSckAAE";
-
-const HUBSPOT_FORM_ID = "0a6163f6-f99b-489a-821a-b0ebbf6dd284";
-
-const EVENT_CATEGORY = "FrutaTemporada";
-
 /**
  * Parse the utms and Adwords gclid
  * @returns {object}
