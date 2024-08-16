@@ -1,32 +1,44 @@
 {
-    "lang" : "es",
+    "lang": "es",
     "home_url": "https://es.greenpeace.org/es/",
     "title": "Guía de temporada",
     "description": [
         "Descripción calendario de frutas y legumbres de temporada"
     ],
+    "config": {
+        "SALESFORCE_CAMPAIGN": "70108000000iSckAAE",
+        "HUBSPOT_FORM_ID": "0a6163f6-f99b-489a-821a-b0ebbf6dd284",
+        "FORM_GOAL": "Download",
+        "HUBSPOT_FORM_TITLE": "Fruta de temporada",
+        "EVENT_CATEGORY": "FrutaTemporada",
+        "ADWORDS_ACCOUNT_ID": 1053230267,
+        "ADWORDS_GRANTS_ACCOUNT_ID": 961833097,
+        "CONVERSION_LABEL_DISPLAY": "bRpeCJuYw_gCELuJnPYD",
+        "CONVERSION_LABEL_NEW_DISPLAY": "EhujCKmdw_gCELuJnPYD",
+        "CONVERSION_LABEL_GRANTS": "mLMyCKatwvgCEInR0coD"
+    },
     "privacy_policy_url": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
-    "top_menu" : [
+    "top_menu": [
         {
-            "id" : "m0",
-            "text" : "Home",
-            "external" : false,
-            "url" : "/"
+            "id": "m0",
+            "text": "Home",
+            "external": false,
+            "url": "/"
         },
         {
-            "id" : "m1",
-            "text" : "Calendario",
-            "external" : false,
-            "url" : "/calendario/"
+            "id": "m1",
+            "text": "Calendario",
+            "external": false,
+            "url": "/calendario/"
         },
         {
-            "id" : "m2",
-            "text" : "Noticias",
-            "external" : true,
-            "url" : "https://es.greenpeace.org/es/noticias/"
+            "id": "m2",
+            "text": "Noticias",
+            "external": true,
+            "url": "https://es.greenpeace.org/es/noticias/"
         }
     ],
-    "mobile_menu" : "Menu",
+    "mobile_menu": "Menu",
     "form": {
         "label_first_name": "Nombre",
         "label_last_name": "Apellidos",
