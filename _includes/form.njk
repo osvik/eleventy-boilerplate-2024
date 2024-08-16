@@ -8,7 +8,7 @@
                     gclid: '',
                     ip: '',
                     uagent: '',
-                    hs_language: '{{ locale }}',
+                    hs_language: '{{ lang }}',
                     first_name: '',
                     last_name: '',
                     email: '',
@@ -127,7 +127,7 @@
     <input type="hidden" name="en_txn7" id="ip" x-model="values.ip"/>
     <input type="hidden" name="en_txn8" id="uagent" x-model="values.uagent"/>
     <input type="hidden" name="last_abtest_variant" id="last_abtest_variant" value=""/>
-    <input type="hidden" name="hs_language" id="hs_language" x-model="values.hs_language" value="{{ locale }}"/>
+    <input type="hidden" name="hs_language" id="hs_language" x-model="values.hs_language" value="{{ lang }}"/>
     <div class="form-group">
         <label for="first_name" class="d-none">{{ form.label_first_name }}
             <sup title="{{ form.required }}">*</sup>
