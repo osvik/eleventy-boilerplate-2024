@@ -337,18 +337,25 @@ const autofillFromHubspot = function (email, token) {
         let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
         hbspt_url.searchParams.set("email", email);
         hbspt_url.searchParams.set("hbspt_token", token);
-        jQuery.ajax({
-            url: hbspt_url.href,
-        }).done(function (data) {
-            jQuery("#first_name").val(data.firstname);
-            jQuery("#last_name").val(data.lastname);
-            jQuery("#email").val(email);
-            jQuery("#phone_number").val(String(data.mobilephone || data.phone));
-            jQuery("#id_number").val(data.id_number);
-        }).fail((jqXHR, textStatus, errorThrown) => {
-            analytics.trackError("Info email server not working. textStatus=" + textStatus + " errorThrown=" + errorThrown);
-        });
+
+        fetch(hbspt_url.href)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById("first_name").value = data.firstname;
+                document.getElementById("last_name").value = data.lastname;
+                document.getElementById("email").value = email;
+                document.getElementById("phone_number").value = String(data.mobilephone || data.phone);
+                // document.getElementById("id_number").value = data.id_number;
+            })
+            .catch(error => {
+                console.error("Info email server not working. error=" + error);
+            });
     } else {
-        analytics.trackError("Didn't asked Hubspot user data, error in params");
+        console.error("Didn't asked Hubspot user data, error in params");
     }
 };
