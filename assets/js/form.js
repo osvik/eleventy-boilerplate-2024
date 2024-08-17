@@ -21,19 +21,19 @@ async function stringParams() {
     paramsObj.adgroup = urlParams.has('hsa_grp') ? urlParams.get('hsa_grp') : '';
     paramsObj.campaign = urlParams.has('hsa_cam') ? urlParams.get('hsa_cam') : '';
 
-    if ( paramsObj.gclid !== "" && paramsObj.utm_medium === "") {
+    if (paramsObj.gclid !== "" && paramsObj.utm_medium === "") {
         paramsObj.utm_medium = "ppc";
     }
 
-    if ( paramsObj.gclid !== "" && paramsObj.utm_source === "") {
+    if (paramsObj.gclid !== "" && paramsObj.utm_source === "") {
         paramsObj.utm_source = "adwords";
     }
 
-    if ( paramsObj.gclid !== "" && paramsObj.utm_campaign === "") {
+    if (paramsObj.gclid !== "" && paramsObj.utm_campaign === "") {
         paramsObj.utm_campaign = EVENT_CATEGORY;
     }
 
-    if ( ["adwords", "google"].includes(paramsObj.utm_source) && ["ppc", "cpc"].includes(paramsObj.utm_medium) ) {
+    if (["adwords", "google"].includes(paramsObj.utm_source) && ["ppc", "cpc"].includes(paramsObj.utm_medium)) {
 
         const rawResponse = await fetch("https://apis.greenpeace.es/hubspot-urls/?" + new URLSearchParams({
             adgroup: paramsObj.adgroup,
@@ -44,7 +44,7 @@ async function stringParams() {
         });
 
         const jsonResponse = await rawResponse.json();
-        if ( typeof(jsonResponse.campaign_name) === "string" ) {
+        if (typeof (jsonResponse.campaign_name) === "string") {
             paramsObj.utm_content = jsonResponse.campaign_name;
         } else {
             gtag('event', 'exception', {
@@ -52,7 +52,7 @@ async function stringParams() {
                 'fatal': false
             });
         }
-        if ( typeof(jsonResponse.group_name) === "string" ) {
+        if (typeof (jsonResponse.group_name) === "string") {
             paramsObj.utm_term = jsonResponse.group_name;
         } else {
             gtag('event', 'exception', {
@@ -122,7 +122,7 @@ const str_replace = function (e, t, n) {
     var a = (s = [].concat(s)).length;
     while (j = 0, a--) {
         if (s[a]) {
-            while (s[a] = s[a].split(r[j]).join(o ? i[j] || "" : i[0]), ++j in r) {}
+            while (s[a] = s[a].split(r[j]).join(o ? i[j] || "" : i[0]), ++j in r) { }
         }
     }
     return u ? s : s[0];
@@ -218,69 +218,69 @@ async function sendToHubspot(formValues) {
 
     const data = JSON.stringify({
         "fields": [{
-                "name": "utm_campaign",
-                "value": formValues.utm_campaign
-            },
-            {
-                "name": "utm_source",
-                "value": formValues.utm_source
-            },
-            {
-                "name": "utm_medium",
-                "value": formValues.utm_medium
-            },
-            {
-                "name": "utm_content",
-                "value": formValues.utm_content
-            },
-            {
-                "name": "utm_term",
-                "value": formValues.utm_term
-            },
-            {
-                "name": "en_txn6",
-                "value": formValues.gclid
-            },
-            {
-                "name": "en_txn7",
-                "value": formValues.ip
-            },
-            {
-                "name": "en_txn8",
-                "value": formValues.uagent
-            },
-            {
-                "name": "last_abtest_variant__c",
-                "value": document.getElementById('last_abtest_variant').value
-            },
-            {
-                "name": "hs_language",
-                "value": formValues.hs_language
-            },
-            {
-                "name": "email",
-                "value": email
-            },
-            {
-                "name": "firstname",
-                "value": first_name
-            },
-            {
-                "name": "lastname",
-                "value": last_name
-            },
-            {
-                "name": "id_number",
-                "value": id_number
-            },
-            {
-                "name": "phone",
-                "value": /^[89]\d{8}$/.test(phone) ? phone : ""
-            },
-            {
-                "name": "mobilephone",
-                "value": /^[67]\d{8}$/.test(phone) ? phone : ""
-            }
+            "name": "utm_campaign",
+            "value": formValues.utm_campaign
+        },
+        {
+            "name": "utm_source",
+            "value": formValues.utm_source
+        },
+        {
+            "name": "utm_medium",
+            "value": formValues.utm_medium
+        },
+        {
+            "name": "utm_content",
+            "value": formValues.utm_content
+        },
+        {
+            "name": "utm_term",
+            "value": formValues.utm_term
+        },
+        {
+            "name": "en_txn6",
+            "value": formValues.gclid
+        },
+        {
+            "name": "en_txn7",
+            "value": formValues.ip
+        },
+        {
+            "name": "en_txn8",
+            "value": formValues.uagent
+        },
+        {
+            "name": "last_abtest_variant__c",
+            "value": document.getElementById('last_abtest_variant').value
+        },
+        {
+            "name": "hs_language",
+            "value": formValues.hs_language
+        },
+        {
+            "name": "email",
+            "value": email
+        },
+        {
+            "name": "firstname",
+            "value": first_name
+        },
+        {
+            "name": "lastname",
+            "value": last_name
+        },
+        {
+            "name": "id_number",
+            "value": id_number
+        },
+        {
+            "name": "phone",
+            "value": /^[89]\d{8}$/.test(phone) ? phone : ""
+        },
+        {
+            "name": "mobilephone",
+            "value": /^[67]\d{8}$/.test(phone) ? phone : ""
+        }
         ],
         "context": {
             "hutk": cookie_read("hubspotutk"),
@@ -303,7 +303,7 @@ async function sendToHubspot(formValues) {
 
     if (rawResponse.ok) {
         trigger("signup", "form:submit", {
-           was_contact : formValues.is_contact
+            was_contact: formValues.is_contact
         });
     } else {
         trigger("signup", "form:error", {});
@@ -323,6 +323,32 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 document.addEventListener('alpine:init', () => {
 
     Alpine.store('fname', '');
-    
+
 });
 
+
+/**
+ * Gets information from Hubspot and fills the form fields with that information
+ * @param {*} email 
+ * @param {*} token 
+ */
+const autofillFromHubspot = function (email, token) {
+    if (/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(email) && /^[0-9a-f]{5,40}$/.test(token)) {
+        let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
+        hbspt_url.searchParams.set("email", email);
+        hbspt_url.searchParams.set("hbspt_token", token);
+        jQuery.ajax({
+            url: hbspt_url.href,
+        }).done(function (data) {
+            jQuery("#first_name").val(data.firstname);
+            jQuery("#last_name").val(data.lastname);
+            jQuery("#email").val(email);
+            jQuery("#phone_number").val(String(data.mobilephone || data.phone));
+            jQuery("#id_number").val(data.id_number);
+        }).fail((jqXHR, textStatus, errorThrown) => {
+            analytics.trackError("Info email server not working. textStatus=" + textStatus + " errorThrown=" + errorThrown);
+        });
+    } else {
+        analytics.trackError("Didn't asked Hubspot user data, error in params");
+    }
+};
