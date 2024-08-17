@@ -213,7 +213,7 @@
                         <h2>Content</h2> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 
-                        <form id="signup" class="form" novalidate x-on:submit.prevent="" x-init="populate_utms()" x-data="{
+                        <form id="signup" class="form" novalidate="novalidate" x-on:submit.prevent="" x-init="populate_utms(); autofill();" x-data="{
                 values : {
                     utm_medium: '',
                     utm_source: '',
@@ -233,7 +233,7 @@
                     is_contact: false,
                 },
                 show_errors: false,
-                errors: { 
+                errors: {
                     first_name: '',
                     last_name: '',
                     email: '',
@@ -250,7 +250,7 @@
                     this.values.utm_content = utmValues.utm_content;
                     this.values.utm_term = utmValues.utm_term;
                     this.values.gclid = utmValues.gclid;
-                }, 
+                },
                 validate(){
                     this.required('first_name');
                     this.required('last_name');
@@ -331,7 +331,38 @@
                     } else {
                         this.errors[field_name] = '';
                     }
-                }
+                },
+                async autofill(){
+                    const hash = window.location.hash.slice(1,);
+                    const email = hash.split('/')[0];
+                    const token = hash.split('/')[1];
+                    if ( isValidEmail(email) && /^[0-9a-f]{5,40}$/.test(token)) {
+                        let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
+                        hbspt_url.searchParams.set('email', email);
+                        hbspt_url.searchParams.set('hbspt_token', token);
+
+                        fetch(hbspt_url.href)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                this.values.first_name = data.firstname;
+                                this.values.last_name = data.lastname;
+                                this.values.email = email;
+                                this.values.phone_number = String(data.mobilephone || data.phone);
+                                // this.values.id_number = data.id_number;
+                                window.location.hash = '';
+                            })
+                            .catch(error => {
+                                console.error('Info email server not working. Error=' + error);
+                            });
+                    } else {
+                        console.error('Did not asked for Hubspot user data, error in params');
+                    }
+                },
             }">
     <input type="hidden" name="utm_medium" id="utm_medium" x-model="values.utm_medium"/>
     <input type="hidden" name="utm_source" id="utm_source" x-model="values.utm_source"/>
@@ -361,14 +392,10 @@
         <label for="email" class="d-none">Email
             <sup title="Campo obligatório">*</sup>
         </label>
-        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="Email *" x-model="values.email" x-on:input="is_required_email('email'); $store.email = $el.value" x-on:change="is_new_email()"  x-on:click="$dispatch('form:click');"/>
+        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="Email *" x-model="values.email" x-on:input="is_required_email('email'); $store.email = $el.value" x-on:change="is_new_email()" x-on:click="$dispatch('form:click');"/>
         <div class="error-message" x-text="errors.email" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
-    <!--<div class="form-group">
-                    <label for="id_number" class="d-none">DNI o NIE <sup title="Campo obligatório">*</sup> <span class="sr-only">Ej 1234567x o y1234567x</span></label>
-                    <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="DNI o NIE" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" />
-                    <div class="error-message" x-text="errors.id_number"  x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
-                </div> -->
+    <!--<div class="form-group"> <label for="id_number" class="d-none">DNI o NIE <sup title="Campo obligatório">*</sup> <span class="sr-only">Ej 1234567x o y1234567x</span></label> <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="DNI o NIE" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" /> <div class="error-message" x-text="errors.id_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div> </div> -->
     <div class="form-group">
         <label for="phone_number" class="d-none">Teléfono
             <sup title="Campo obligatório">*</sup>
@@ -389,12 +416,14 @@
             <span id="iaccept">Acepto la política de privacidad
                 <sup title="Campo obligatório">*</sup>
             </span>
-            <div class="error-message" x-text="errors.privacy"  x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+            <div class="error-message" x-text="errors.privacy" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
         </label>
     </div>
     <div class="buttoncontainer">
         <button type="submit" class="colored-button" x-on:click="show_errors = true; validate(); is_valid() && submit_form()">
-            Quiero mi guÍa » </button>
+            Quiero mi guÍa
+            »
+        </button>
     </div>
 </form>
                         

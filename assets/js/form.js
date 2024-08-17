@@ -325,37 +325,3 @@ document.addEventListener('alpine:init', () => {
     Alpine.store('fname', '');
 
 });
-
-
-/**
- * Gets information from Hubspot and fills the form fields with that information
- * @param {*} email 
- * @param {*} token 
- */
-const autofillFromHubspot = function (email, token) {
-    if (/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(email) && /^[0-9a-f]{5,40}$/.test(token)) {
-        let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
-        hbspt_url.searchParams.set("email", email);
-        hbspt_url.searchParams.set("hbspt_token", token);
-
-        fetch(hbspt_url.href)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById("first_name").value = data.firstname;
-                document.getElementById("last_name").value = data.lastname;
-                document.getElementById("email").value = email;
-                document.getElementById("phone_number").value = String(data.mobilephone || data.phone);
-                // document.getElementById("id_number").value = data.id_number;
-            })
-            .catch(error => {
-                console.error("Info email server not working. error=" + error);
-            });
-    } else {
-        console.error("Didn't asked Hubspot user data, error in params");
-    }
-};
