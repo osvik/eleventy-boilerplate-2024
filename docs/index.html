@@ -352,15 +352,23 @@
                                 this.values.first_name = data.firstname;
                                 this.values.last_name = data.lastname;
                                 this.values.email = email;
-                                this.values.phone_number = String(data.mobilephone || data.phone);
+                                this.values.phone_number = (String(data.mobilephone || data.phone)) !=='undefined' ? (String(data.mobilephone || data.phone)) : '';
                                 // this.values.id_number = data.id_number;
                                 window.location.hash = '';
                             })
                             .catch(error => {
                                 console.error('Info email server not working. Error=' + error);
+                                gtag('event', 'exception', {
+                                    'description': 'Info email server not working. Error=' + error,
+                                    'fatal': false
+                                });
                             });
-                    } else {
+                    } else if (window.location.hash.search('/') > 1) {
                         console.error('Did not asked for Hubspot user data, error in params');
+                        gtag('event', 'exception', {
+                            'description': 'Did not asked for Hubspot user data, error in params',
+                            'fatal': false
+                        });
                     }
                 },
             }">
