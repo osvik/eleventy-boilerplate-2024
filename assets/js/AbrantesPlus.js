@@ -1,5 +1,3 @@
-/* jshint esversion:6 */
-
 const Abrantes = Object.create(null);
 
 Abrantes.testId = undefined;
@@ -278,8 +276,6 @@ Abrantes.track = function () {
     Object.assign(Abrantes.settings, settings);
 
 }
-
-/* eslint-disable no-undef */
 
 {
 

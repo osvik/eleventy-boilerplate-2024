@@ -1,7 +1,4 @@
-/* jshint esversion:6 */
-
-/* jshint browser: true, esversion: 6 */
-/* global cookieTrackingManager, console, jQuery, _hsq, gtag, spanishRemarketing, fbq, obApi, googleTrackingConfig, cookieManageUI, hyperSegments, dynamicSegmentation */
+/* global cookieTrackingManager, gtag, fbq, obApi, googleTrackingConfig, dataLayer, twq */
 
 const getConsentString = function() {
     let consentString = "";
@@ -43,8 +40,8 @@ const storeUTMParameters = function() {
             var thirtyMinutesInMillis = 30 * 60 * 1000;
             if (currentTime - storedTimestamp > thirtyMinutesInMillis) {
                 // Timestamp is older than 30 minutes, clear all UTM parameters and timestamp
-                for (var i = 0; i < utmParams.length; i++) {
-                    localStorage.removeItem("gtm_" + utmParams[i]);
+                for (var j = 0; i < utmParams.length; j++) {
+                    localStorage.removeItem("gtm_" + utmParams[j]);
                 }
                 localStorage.removeItem("gtm_timestamp");
             } else {
@@ -56,6 +53,7 @@ const storeUTMParameters = function() {
 };
 
 
+// eslint-disable-next-line no-unused-vars
 const trackingScripts = {
 
     /**
@@ -123,9 +121,6 @@ const trackingScripts = {
      * Google Analytics, footer part
      */
     googleAnalyticsFooter: function () {
-
-        let contentLabels =[];
-        let contentTags =[];
 
         if ( typeof gtag === "function") {  
             

@@ -1,4 +1,5 @@
-/* jshint esversion:8 */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 
 /* FORM FUNCIONS */
 
@@ -72,6 +73,7 @@ async function stringParams() {
  */
 const cookie_read = function (cookieString) {
     var t;
+    // eslint-disable-next-line no-cond-assign
     return (t = (new RegExp("(?:^|; )" + encodeURIComponent(cookieString) + "=([^;]*)")).exec(document.cookie)) ? t[1] : null;
 };
 
@@ -82,6 +84,7 @@ const cookie_read = function (cookieString) {
  */
 const isValidEmail = function (email) {
     email = email.trim();
+    // eslint-disable-next-line no-control-regex
     const valid_email = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/gmi.test(email);
     return valid_email;
 };
@@ -211,7 +214,9 @@ async function sendToHubspot(formValues) {
     const first_name = formValues.first_name.trim();
     const last_name = formValues.last_name.trim();
     const email = formValues.email.trim();
+    // eslint-disable-next-line no-useless-escape
     const id_number = formValues.id_number.replace(/[\.\s-,_\|#]/g, '').toUpperCase();
+    // eslint-disable-next-line no-useless-escape
     const phone = formValues.phone_number.replace(/[\.\s-,_\|#]/g, '');
 
     const postURL = "https://api.hsforms.com/submissions/v3/integration/submit/5361482/" + HUBSPOT_FORM_ID;

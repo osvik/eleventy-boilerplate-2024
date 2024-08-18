@@ -2,11 +2,13 @@
  * Configuring analytics events
  */
 
+/* global dataLayer, gtag, cookieTrackingManager, sha256, fbq, obApi, ttq, twq, twttr,  FORM_GOAL, HUBSPOT_FORM_TITLE, HUBSPOT_FORM_ID, SALESFORCE_CAMPAIGN, EVENT_CATEGORY, ADWORDS_ACCOUNT_ID, CONVERSION_LABEL_DISPLAY, CONVERSION_LABEL_NEW_DISPLAY, ADWORDS_GRANTS_ACCOUNT_ID, CONVERSION_LABEL_GRANTS */
 {
     /**
      * On form start
      */
     let formAlreadyStarted = false;
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('form:click', function (e) {
         if (!formAlreadyStarted) {
             dataLayer.push({
@@ -144,6 +146,7 @@
     /**
      * On form does not submit to Hubspot
      */
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('form:error', function (e) {
         gtag("event", "exception", {
             "description": "Could not send to Hubspot",
@@ -176,6 +179,7 @@
     /**
      * On cookies accept
      */
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('cookies:accept', function (e) {
         gtag('event', 'Click', {
             'event_label': 'Accept',
@@ -193,6 +197,7 @@
     /**
      * On cookies config
      */
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('cookies:config', function (e) {
         gtag('event', 'Click', {
             'event_label': 'Config',
@@ -205,6 +210,7 @@
     /**
      * On cookies check policy
      */
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('cookies:checkpolicy', function (e) {
         gtag('event', 'Click', {
             'event_label': 'Check Policy',
@@ -216,6 +222,7 @@
     /**
      * On cookies accept all
      */
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('cookies:acceptall', function (e) {
         gtag('event', 'Click', {
             'event_label': 'Accept all',
@@ -233,6 +240,7 @@
     /**
      * On cookies deny all
      */
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('cookies:denytall', function (e) {
         gtag('event', 'Click', {
             'event_label': 'Deny all',
@@ -246,6 +254,7 @@
     /**
      * On cookies OK
      */
+    // eslint-disable-next-line no-unused-vars
     document.addEventListener('cookies:ok', function (e) {
         gtag('event', 'Click', {
             'event_label': 'OK ' + String(cookieTrackingManager.consent.cats.analytics) + ',' + String(cookieTrackingManager.consent.cats.segmentation) + ',' + String(cookieTrackingManager.consent.cats.advertisement),

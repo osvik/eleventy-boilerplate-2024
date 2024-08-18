@@ -1,4 +1,4 @@
-/* jshint esversion:6 */
+/* eslint-disable no-unused-vars */
 
 /**
  * Not function for Alpine

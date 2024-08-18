@@ -1,6 +1,7 @@
 /* jshint browser: true, esversion: 6 */
-/* global URLSearchParams, console */
+/* global dataLayer */
 
+// eslint-disable-next-line no-unused-vars
 const cookieTrackingManager = {
 
     /**
@@ -231,8 +232,6 @@ const cookieTrackingManager = {
             }
         }
 
-        console.error("Can't determine if I need to ask for consent");
-        return true;
     }
 
 };
