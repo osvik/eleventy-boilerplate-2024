@@ -15,7 +15,9 @@
                     id_number: '',
                     phone_number: '',
                     privacy: false,
-                    is_contact: false,
+                    is_contact: undefined,
+                    lifecycle: '',
+                    opt_out: undefined	
                 },
                 show_errors: false,
                 errors: {
@@ -71,6 +73,8 @@
                         }));
                         const content = await rawResponse.json();
                         this.values.is_contact = content.is_contact;
+                        this.values.lifecycle = content.lifecycle;
+                        this.values.opt_out = content.opt_out;
                     } else {
                         this.values.is_contact = false;
                         await console.log('Invalid email');
@@ -139,6 +143,9 @@
                                 this.values.email = email;
                                 this.values.phone_number = (String(data.mobilephone || data.phone)) !=='undefined' ? (String(data.mobilephone || data.phone)) : '';
                                 // this.values.id_number = data.id_number;
+                                this.values.is_contact = data.is_contact;
+                                this.values.lifecycle = data.lifecycle;
+                                this.values.opt_out = data.opt_out;
                                 window.location.hash = '';
                             })
                             .catch(error => {
@@ -156,7 +163,7 @@
                         });
                     }
                 },
-            }">
+            }" x-model="values", x-modelable="user">
     <input type="hidden" name="utm_medium" id="utm_medium" x-model="values.utm_medium"/>
     <input type="hidden" name="utm_source" id="utm_source" x-model="values.utm_source"/>
     <input type="hidden" name="utm_campaign" id="utm_campaign" x-model="values.utm_campaign"/>
@@ -171,7 +178,7 @@
         <label for="first_name" class="d-none">{{ form.label_first_name }}
             <sup title="{{ form.required }}">*</sup>
         </label>
-        <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="{{ form.label_first_name }} *" x-model="values.first_name" x-on:input="required('first_name'); $store.fname = $el.value" x-on:click="$dispatch('form:click');"/>
+        <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="{{ form.label_first_name }} *" x-model="values.first_name" x-on:input="required('first_name');" x-on:click="$dispatch('form:click');"/>
         <div class="error-message" x-text="errors.first_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <div class="form-group">
@@ -185,7 +192,7 @@
         <label for="email" class="d-none">{{ form.label_email }}
             <sup title="{{ form.required }}">*</sup>
         </label>
-        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="{{ form.label_email }} *" x-model="values.email" x-on:input="is_required_email('email'); $store.email = $el.value" x-on:change="is_new_email()" x-on:click="$dispatch('form:click');"/>
+        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="{{ form.label_email }} *" x-model="values.email" x-on:input="is_required_email('email');" x-on:change="is_new_email()" x-on:click="$dispatch('form:click');"/>
         <div class="error-message" x-text="errors.email" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <!--<div class="form-group"> <label for="id_number" class="d-none">{{ form.label_id_number }} <sup title="{{ form.required }}">*</sup> <span class="sr-only">{{ form.example_id_number }}</span></label> <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="{{ form.label_id_number }}" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" /> <div class="error-message" x-text="errors.id_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div> </div> -->

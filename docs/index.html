@@ -163,7 +163,7 @@
         </head>
     
     
-        <body x-data="{ showModal: false }">
+        <body x-data="{ showModal: false, user: {} }">
 
             
                 <nav x-data="{ openMobile : false }" class="topmenu">
@@ -230,7 +230,9 @@
                     id_number: '',
                     phone_number: '',
                     privacy: false,
-                    is_contact: false,
+                    is_contact: undefined,
+                    lifecycle: '',
+                    opt_out: undefined	
                 },
                 show_errors: false,
                 errors: {
@@ -286,6 +288,8 @@
                         }));
                         const content = await rawResponse.json();
                         this.values.is_contact = content.is_contact;
+                        this.values.lifecycle = content.lifecycle;
+                        this.values.opt_out = content.opt_out;
                     } else {
                         this.values.is_contact = false;
                         await console.log('Invalid email');
@@ -354,6 +358,9 @@
                                 this.values.email = email;
                                 this.values.phone_number = (String(data.mobilephone || data.phone)) !=='undefined' ? (String(data.mobilephone || data.phone)) : '';
                                 // this.values.id_number = data.id_number;
+                                this.values.is_contact = data.is_contact;
+                                this.values.lifecycle = data.lifecycle;
+                                this.values.opt_out = data.opt_out;
                                 window.location.hash = '';
                             })
                             .catch(error => {
@@ -371,7 +378,7 @@
                         });
                     }
                 },
-            }">
+            }" x-model="values", x-modelable="user">
     <input type="hidden" name="utm_medium" id="utm_medium" x-model="values.utm_medium"/>
     <input type="hidden" name="utm_source" id="utm_source" x-model="values.utm_source"/>
     <input type="hidden" name="utm_campaign" id="utm_campaign" x-model="values.utm_campaign"/>
@@ -386,7 +393,7 @@
         <label for="first_name" class="d-none">Nombre
             <sup title="Campo obligatório">*</sup>
         </label>
-        <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="Nombre *" x-model="values.first_name" x-on:input="required('first_name'); $store.fname = $el.value" x-on:click="$dispatch('form:click');"/>
+        <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="Nombre *" x-model="values.first_name" x-on:input="required('first_name');" x-on:click="$dispatch('form:click');"/>
         <div class="error-message" x-text="errors.first_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <div class="form-group">
@@ -400,7 +407,7 @@
         <label for="email" class="d-none">Email
             <sup title="Campo obligatório">*</sup>
         </label>
-        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="Email *" x-model="values.email" x-on:input="is_required_email('email'); $store.email = $el.value" x-on:change="is_new_email()" x-on:click="$dispatch('form:click');"/>
+        <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="Email *" x-model="values.email" x-on:input="is_required_email('email');" x-on:change="is_new_email()" x-on:click="$dispatch('form:click');"/>
         <div class="error-message" x-text="errors.email" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <!--<div class="form-group"> <label for="id_number" class="d-none">DNI o NIE <sup title="Campo obligatório">*</sup> <span class="sr-only">Ej 1234567x o y1234567x</span></label> <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="DNI o NIE" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" /> <div class="error-message" x-text="errors.id_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div> </div> -->
@@ -450,7 +457,7 @@
             <div id="thankspages" x-data="{ screen: 'thankyoupage'}" style="display:none;" aria-hidden="true">
 
     <section id="thankyoupage" x-show="screen === 'thankyoupage'" x-bind:aria-hidden="not(screen === 'thankyoupage')" x-transition.opacity.duration.200ms>
-        <h2>Disfruta tu guía, <span x-text="$store.fname"></span></h2> <p><span style="font-size: larger;">Ya te hemos enviado la guía a <span x-text="$store.email"></span>.</span><br /><br /><span style="font-size: smaller;">Revisa tus bandejas de entrada para empezar a consumir mejor. Si no encuentras la guía o has tenido algún problema para descargarla, escríbenos a <a href="mailto:contacto.es@greenpeace.org" target="_blank" rel="noopener">contacto.es@greenpeace.org</a></span></p> <p>¿Quieres compartirla con tus contactos? Así les ayudarás a que ellos también puedan consumir mejor.</p>
+        <h2>Disfruta tu guía, <span x-text="user.first_name"></span></h2> <p><span style="font-size: larger;">Ya te hemos enviado la guía a <span x-text="user.email"></span>.</span><br /><br /><span style="font-size: smaller;">Revisa tus bandejas de entrada para empezar a consumir mejor. Si no encuentras la guía o has tenido algún problema para descargarla, escríbenos a <a href="mailto:contacto.es@greenpeace.org" target="_blank" rel="noopener">contacto.es@greenpeace.org</a></span></p> <p>¿Quieres compartirla con tus contactos? Así les ayudarás a que ellos también puedan consumir mejor.</p>
 
         <div class="rowbuttons">
             <button type="button" class="colored-button" x-on:click="screen = 'sharepage'; $dispatch('thankyou:buttons', { button: 'yes_to_share' });">&nbsp; Si &nbsp;</button>

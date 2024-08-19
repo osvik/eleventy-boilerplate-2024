@@ -25,7 +25,7 @@
         </head>
     {% endblock %}
     {% block body %}
-        <body x-data="{ showModal: false }">
+        <body x-data="{ showModal: false, user: {} }">
 
             {% block menubar %}
                 {% include "topmenu.njk" %}
