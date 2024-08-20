@@ -1,4 +1,4 @@
-<form id="signup" class="form" novalidate="novalidate" x-on:submit.prevent="" x-init="populate_utms(); autofill();" x-data="{
+<form id="signup" class="form" novalidate="novalidate" x-on:submit.prevent="" x-init="populate_utms(); autofill(); get_info();" x-data="{
                 values : {
                     utm_medium: '',
                     utm_source: '',
@@ -229,6 +229,21 @@
                         }
                     }
                 },
+                async get_info(){
+                    try {
+
+                        const response = await fetch('https://apis.greenpeace.es/info/');
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        this.values.ip = data.IP;
+                        this.values.uagent = data.UA;
+                    
+                    } catch (error) {
+                        console.error('Get info error. Error=' + error);
+                    }
+                }
             }" x-model="values", x-modelable="user">
     <input type="hidden" name="utm_medium" id="utm_medium" x-model="values.utm_medium"/>
     <input type="hidden" name="utm_source" id="utm_source" x-model="values.utm_source"/>
