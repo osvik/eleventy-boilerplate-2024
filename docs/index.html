@@ -233,7 +233,8 @@
                     privacy: false,
                     is_contact: undefined,
                     lifecycle: '',
-                    opt_out: undefined	
+                    opt_out: undefined,
+                    hbspt_token: ''
                 },
                 show_errors: false,
                 errors: {
@@ -394,6 +395,7 @@
                             this.values.is_contact = data.is_contact;
                             this.values.lifecycle = data.lifecycle;
                             this.values.opt_out = data.opt_out;
+                            this.values.hbspt_token = token;
                             window.location.hash = '';
                         } catch (error) {
                             console.error('Info email server not working 1. Error=' + error);
