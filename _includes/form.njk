@@ -14,6 +14,7 @@
                     email: '',
                     id_number: '',
                     phone_number: '',
+                    zip: '',
                     privacy: false,
                     is_contact: undefined,
                     lifecycle: '',
@@ -65,6 +66,27 @@
                         document.getElementById('thankspages').removeAttribute('aria-hidden')
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
+                    const getDataInForm = {
+                        first_name: this.values.first_name ,
+                        last_name: this.values.last_name, 
+                        email: this.values.email,
+                        id_number: this.values.id_number,
+                        phone_number: this.values.phone_number,
+                        zip: this.values.zip,
+                        privacy: this.values.privacy,
+                        utm: {
+                            medium: this.values.utm_medium,
+                            source: this.values.utm_source,
+                            campaign: this.values.utm_campaign,
+                            content: this.values.utm_content,
+                            term: this.values.utm_term,
+                        },
+                        gclid: this.values.gclid,
+                        analytics_campaign_name: EVENT_CATEGORY,
+                        is_regular_donor: this.values.lifecycle === 'customer' ? true : false,
+                        is_hubsppot_contact: this.values.is_contact === true ? true : null
+                    };
+                    multipage.storeData(getDataInForm);
                 },
                 async is_new_email(){
                     if ( this.errors.email ==='' ){
