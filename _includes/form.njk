@@ -156,31 +156,28 @@
                         let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
                         hbspt_url.searchParams.set('email', email);
                         hbspt_url.searchParams.set('hbspt_token', token);
-                        await fetch(hbspt_url.href)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                console.log(response.json());
-                            })
-                            .then(data => {
-                                this.values.first_name = data.firstname;
-                                this.values.last_name = data.lastname;
-                                this.values.email = email;
-                                this.values.phone_number = (String(data.mobilephone || data.phone)) !=='undefined' ? (String(data.mobilephone || data.phone)) : '';
-                                // this.values.id_number = data.id_number;
-                                this.values.is_contact = data.is_contact;
-                                this.values.lifecycle = data.lifecycle;
-                                this.values.opt_out = data.opt_out;
-                                window.location.hash = '';
-                            })
-                            .catch(error => {
-                                console.error('Info email server not working 1. Error=' + error);
-                                gtag('event', 'exception', {
-                                    'description': 'Info email server not working. Error=' + error,
-                                    'fatal': false
-                                });
+                        try {
+                            const response = await fetch(hbspt_url.href);
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            const data = await response.json();
+                            this.values.first_name = data.firstname;
+                            this.values.last_name = data.lastname;
+                            this.values.email = email;
+                            this.values.phone_number = (String(data.mobilephone || data.phone)) !=='undefined' ? (String(data.mobilephone || data.phone)) : '';
+                            // this.values.id_number = data.id_number;
+                            this.values.is_contact = data.is_contact;
+                            this.values.lifecycle = data.lifecycle;
+                            this.values.opt_out = data.opt_out;
+                            window.location.hash = '';
+                        } catch (error) {
+                            console.error('Info email server not working 1. Error=' + error);
+                            gtag('event', 'exception', {
+                                'description': 'Info email server not working 1. Error=' + error,
+                                'fatal': false
                             });
+                        }
                     } else if (window.location.hash.search('/') > 1) {
                         console.error('Did not asked for Hubspot user data, error in params');
                         gtag('event', 'exception', {
@@ -202,25 +199,23 @@
                         this.values.gclid = existingData.gclid;
                         let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
                         hbspt_url.searchParams.set('email', this.values.email);
-                        await fetch(hbspt_url.href)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                console.log(response.json());
-                            })
-                            .then(data => {
-                                this.values.is_contact = data.is_contact;
-                                this.values.lifecycle = data.lifecycle;
-                                this.values.opt_out = data.opt_out;
-                            })
-                            .catch(error => {
-                                console.error('Info email server not working 2. Error=' + error);
-                                gtag('event', 'exception', {
-                                    'description': 'Info email server not working. Error=' + error,
-                                    'fatal': false
-                                });
+                        try {
+                            const response = await fetch(hbspt_url.href);
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            const data = await response.json();
+                            this.values.is_contact = data.is_contact;
+                            this.values.lifecycle = data.lifecycle;
+                            this.values.opt_out = data.opt_out;
+                        
+                        } catch (error) {
+                            console.error('Info email server not working 2. Error=' + error);
+                            gtag('event', 'exception', {
+                                'description': 'Info email server not working 2. Error=' + error,
+                                'fatal': false
                             });
+                        }
                     }
                 },
             }" x-model="values", x-modelable="user">
