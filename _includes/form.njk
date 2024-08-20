@@ -147,17 +147,21 @@
                     const hash = window.location.hash.slice(1,);
                     const email = hash.split('/')[0];
                     const token = hash.split('/')[1];
+                    const existingData = multipage.getData();
+                    let dataExists;
+                    if (Object.keys(existingData).length === 0) {
+                        dataExists = false;
+                    }
                     if ( isValidEmail(email) && /^[0-9a-f]{5,40}$/.test(token)) {
                         let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
                         hbspt_url.searchParams.set('email', email);
                         hbspt_url.searchParams.set('hbspt_token', token);
-
-                        fetch(hbspt_url.href)
+                        await fetch(hbspt_url.href)
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! status: ${response.status}`);
                                 }
-                                return response.json();
+                                console.log(response.json());
                             })
                             .then(data => {
                                 this.values.first_name = data.firstname;
@@ -171,7 +175,7 @@
                                 window.location.hash = '';
                             })
                             .catch(error => {
-                                console.error('Info email server not working. Error=' + error);
+                                console.error('Info email server not working 1. Error=' + error);
                                 gtag('event', 'exception', {
                                     'description': 'Info email server not working. Error=' + error,
                                     'fatal': false
@@ -183,6 +187,40 @@
                             'description': 'Did not asked for Hubspot user data, error in params',
                             'fatal': false
                         });
+                    } else if (dataExists !== false) {
+                        this.values.first_name = existingData.first_name;
+                        this.values.last_name = existingData.last_name;
+                        this.values.email = existingData.email;
+                        this.values.id_number = existingData.id_number;
+                        this.values.phone_number = existingData.phone_number;
+                        this.values.zip = existingData.zip;
+                        this.values.utm_medium = existingData.utm.medium;
+                        this.values.utm_source = existingData.utm.source;
+                        this.values.utm_campaign = existingData.utm.campaign;
+                        this.values.utm_content = existingData.utm.content;
+                        this.values.utm_term = existingData.utm.term;
+                        this.values.gclid = existingData.gclid;
+                        let hbspt_url = new URL('https://apis.greenpeace.es/email-info/');
+                        hbspt_url.searchParams.set('email', this.values.email);
+                        await fetch(hbspt_url.href)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                console.log(response.json());
+                            })
+                            .then(data => {
+                                this.values.is_contact = data.is_contact;
+                                this.values.lifecycle = data.lifecycle;
+                                this.values.opt_out = data.opt_out;
+                            })
+                            .catch(error => {
+                                console.error('Info email server not working 2. Error=' + error);
+                                gtag('event', 'exception', {
+                                    'description': 'Info email server not working. Error=' + error,
+                                    'fatal': false
+                                });
+                            });
                     }
                 },
             }" x-model="values", x-modelable="user">
