@@ -90,16 +90,25 @@
                 },
                 async is_new_email(){
                     if ( this.errors.email ==='' ){
-                        const rawResponse = await fetch('https://apis.greenpeace.es/email-info/?' + new URLSearchParams({
-                            email: this.values.email
-                        }));
-                        const content = await rawResponse.json();
-                        this.values.is_contact = content.is_contact;
-                        this.values.lifecycle = content.lifecycle;
-                        this.values.opt_out = content.opt_out;
+                        try {
+                            const rawResponse = await fetch('https://apis.greenpeace.es/email-info/?' + new URLSearchParams({
+                                email: this.values.email
+                            }));
+                            const content = await rawResponse.json();
+                            this.values.is_contact = content.is_contact;
+                            this.values.lifecycle = content.lifecycle;
+                            this.values.opt_out = content.opt_out;
+                        } catch (error) {
+                            console.error('Info email server not working 3. Error=' + error);
+                            gtag('event', 'exception', {
+                                'description': 'Info email server not working 3. Error=' + error,
+                                'fatal': false
+                            });
+                        }
+                        
                     } else {
                         this.values.is_contact = false;
-                        await console.log('Invalid email');
+                        console.log('Invalid email');
                     }
                 },
                 required(field_name) {

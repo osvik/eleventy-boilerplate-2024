@@ -36,31 +36,44 @@ async function stringParams() {
 
     if (["adwords", "google"].includes(paramsObj.utm_source) && ["ppc", "cpc"].includes(paramsObj.utm_medium)) {
 
-        const rawResponse = await fetch("https://apis.greenpeace.es/hubspot-urls/?" + new URLSearchParams({
-            adgroup: paramsObj.adgroup,
-            campaign: paramsObj.campaign
-        }), {
-            method: "GET",
-            mode: "cors"
-        });
+        try {
 
-        const jsonResponse = await rawResponse.json();
-        if (typeof (jsonResponse.campaign_name) === "string") {
-            paramsObj.utm_content = jsonResponse.campaign_name;
-        } else {
+            const rawResponse = await fetch("https://apis.greenpeace.es/hubspot-urls/?" + new URLSearchParams({
+                adgroup: paramsObj.adgroup,
+                campaign: paramsObj.campaign
+            }), {
+                method: "GET",
+                mode: "cors"
+            });
+
+            const jsonResponse = await rawResponse.json();
+            if (typeof (jsonResponse.campaign_name) === "string") {
+                paramsObj.utm_content = jsonResponse.campaign_name;
+            } else {
+                gtag('event', 'exception', {
+                    'description': 'Unknown Adwords campaign number' + paramsObj.campaign,
+                    'fatal': false
+                });
+            }
+            if (typeof (jsonResponse.group_name) === "string") {
+                paramsObj.utm_term = jsonResponse.group_name;
+            } else {
+                gtag('event', 'exception', {
+                    'description': 'Unknown Adwords ad group number' + paramsObj.adgroup,
+                    'fatal': false
+                });
+            }
+
+        } catch (error) {
+
+            console.error("The Hubspot URLS API returned an error: ", error);
             gtag('event', 'exception', {
-                'description': 'Unknown Adwords campaign number' + paramsObj.campaign,
+                'description': "The Hubspot URLS API returned an error: " + error,
                 'fatal': false
             });
+
         }
-        if (typeof (jsonResponse.group_name) === "string") {
-            paramsObj.utm_term = jsonResponse.group_name;
-        } else {
-            gtag('event', 'exception', {
-                'description': 'Unknown Adwords ad group number' + paramsObj.adgroup,
-                'fatal': false
-            });
-        }
+
     }
 
     return paramsObj;
@@ -295,26 +308,44 @@ async function sendToHubspot(formValues) {
         }
     });
 
-    const rawResponse = await fetch(postURL, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: data
-    });
+    try {
 
-    const content = await rawResponse.json();
-
-    if (rawResponse.ok) {
-        trigger("signup", "form:submit", {
-            was_contact: formValues.is_contact
+        const rawResponse = await fetch(postURL, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: data
         });
-    } else {
-        trigger("signup", "form:error", {});
-    }
+        const content = await rawResponse.json();
 
-    return rawResponse.ok;
+        if (rawResponse.ok) {
+            trigger("signup", "form:submit", {
+                was_contact: formValues.is_contact
+            });
+        } else {
+            trigger("signup", "form:error", {});
+            console.error('Data was not sent to Hubspot 1. Error=' + error);
+            gtag('event', 'exception', {
+                'description': 'Data was not sent to Hubspot 1. Error=' + error,
+                'fatal': false
+            });
+            console.log(content);
+        }
+        return rawResponse.ok;
+
+    } catch (error) {
+
+        trigger("signup", "form:error", {});
+        console.error('Data was not sent to Hubspot 2. Error=' + error);
+        gtag('event', 'exception', {
+            'description': 'Data was not sent to Hubspot 2. Error=' + error,
+            'fatal': false
+        });
+        return false;
+
+    }
 
 }
 
