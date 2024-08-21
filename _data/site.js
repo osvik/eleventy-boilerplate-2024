@@ -28,7 +28,7 @@ module.exports = function () {
         basedomain: basedomainVal,
         assets: assetsVal,
         isDev: development,
-        version: "0.6.1",
+        version: "0.6.2",
         googleTagManager: "WJL33446",
         ab_testing: false
     };
