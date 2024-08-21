@@ -1,6 +1,6 @@
 {% macro bar(id = 'altri', correction = 0, goal = 500000, ctxt = '') %}
     <style>
-        progress {
+        .counter-greenpeace progress {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -10,17 +10,22 @@
             border-radius: 2px;
         }
 
-        progress::-webkit-progress-bar {
+        .counter-greenpeace progress::-webkit-progress-bar {
             background-color: #eee;
             border-radius: 2px;
         }
-        progress::-webkit-progress-value {
+        .counter-greenpeace progress::-webkit-progress-value {
             background-color: #66cc00;
             border-radius: 2px;
         }
-        progress::-moz-progress-bar {
+        .counter-greenpeace progress::-moz-progress-bar {
             background-color: #66cc00;
             border-radius: 2px;
+        }
+
+        .counter-greenpeace label, .counter-greenpeace progress {
+            display: block;
+            margin: 5px 0;
         }
 
     </style>
@@ -63,8 +68,7 @@
         }
     }">
 
-        <label for="{{ id }}">
-        <span x-text="maskNumber(counter + correction)"></span> {{ ctxt }} <span x-text="maskNumber(goal);"></span>!</label>
+        <label for="{{ id }}"><span x-text="maskNumber(counter + correction)"></span> {{ ctxt }} <span x-text="maskNumber(goal);"></span>!</label>
         <progress id="{{ id }}" x-bind:value="counter + correction" x-bind:max="goal" x-text="percentage"> 0% </progress>
 
     </div>
