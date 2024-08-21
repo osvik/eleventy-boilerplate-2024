@@ -27,6 +27,12 @@ This is a starter project to develop custom web pages for Greenpeace Spain.
 * GA4 with GP Spain standard
 * AB test tool for Mixpanel, GA4 and Hotjar, with CRM support
 * Adwords ad management
+* Tracked social media share links (TO DO)
+
+## SEO
+
+* Open graph to easily share in social media
+* Metas anc canonical url
 
 ### Developer
 
