@@ -18,6 +18,23 @@
     --text-line-height: 1.5rem
 }
 
+:root {
+    --text-color: #212529;
+    --light-text-color: #ffffff;
+    --main-bg-color: #ffffff;
+    --second-bg-color: #f6f6f5;
+    --third-bg-color: #144005;
+    --links-color: #0f0397;
+    --links-hover: #cb5937;
+    --hover-color: rgb(255, 240, 10);
+    --headers-font: "Work Sans", sans-serif;
+    --regular-font: "Source Serif 4", serif;
+    --light-font-weight: 200;
+    --bold-font-weight: 800;
+    --text-line-height: 1.5rem;
+    --progress-bar-color: #66cc00
+}
+
 body,
 html {
     margin: 0;
