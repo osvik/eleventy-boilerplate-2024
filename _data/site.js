@@ -3,7 +3,7 @@
 module.exports = function () {
     // eslint-disable-next-line no-undef
     const environmentVal = process.env.MY_ENVIRONMENT || "development";
-    let domainVal, basedomainVal, assetsVal, development_siteVal;
+    let domainVal, basedomainVal, assetsVal, development;
 
     if (environmentVal === "development") {
         domainVal = "http://localhost:8080";
@@ -28,7 +28,7 @@ module.exports = function () {
         basedomain: basedomainVal,
         assets: assetsVal,
         isDev: development,
-        version: "0.5",
+        version: "0.6",
         googleTagManager: "WJL33446",
         ab_testing: false
     };
