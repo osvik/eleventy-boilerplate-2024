@@ -19,7 +19,8 @@
                     is_contact: undefined,
                     lifecycle: '',
                     opt_out: undefined,
-                    hbspt_token: ''
+                    hbspt_token: '',
+                    sf_campaign_ids: []
                 },
                 show_errors: false,
                 errors: {
@@ -181,6 +182,7 @@
                             this.values.lifecycle = data.lifecycle;
                             this.values.opt_out = data.opt_out;
                             this.values.hbspt_token = token;
+                            this.values.sf_campaign_ids = data.salesforce_campaignids;
                             window.location.hash = '';
                         } catch (error) {
                             console.error('Info email server not working 1. Error=' + error);
