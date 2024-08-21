@@ -534,36 +534,75 @@
 
                         
                         
-<div class="counter-greenpeace" x-init="get_signups();" x-data="{
-    id: 'altri',
-    correction: 0,
-    counter: 0,
-    goal: 500000,
-    async get_signups() {
-        try {
-            let counter_url = new URL('https://counter.greenpeace.org/signups');
-            counter_url.searchParams.set('id', this.id);
-            const response = await fetch(counter_url.href);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            this.id = data.id;
-            this.counter = data.unique_count;
-        } catch (error) {
-            console.error('The Greenpeace counter is not working. Error=' + error);
-            gtag('event', 'exception', {
-                'description': 'The Greenpeace counter is not working. Error=' + error,
-                'fatal': false
-            });
+    <style>
+        progress {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 2px;
         }
-    }
-}">
-<p>Counter id: <span x-text="id"></span></p>
-<p>Correction: <span x-text="correction"></span></p>
-<p>Counter value: <span x-text="counter + correction"></span></p>
-<p>Counter goal: <span x-text="goal"></span></p>
-</div>
+
+        progress::-webkit-progress-bar {
+            background-color: #eee;
+            border-radius: 2px;
+        }
+        progress::-webkit-progress-value {
+            background-color: #66cc00;
+            border-radius: 2px;
+        }
+        progress::-moz-progress-bar {
+            background-color: #66cc00;
+            border-radius: 2px;
+        }
+
+    </style>
+    <div class="counter-greenpeace" x-init="get_signups();" x-data="{
+        id: 'altri',
+        correction: 0,
+        counter: 0,
+        goal: 500000,
+        percentage(){
+            const ratio = (this.counter + this.correction) / this.goal * 100;
+            const rounded_ratio = parseInt(ratio, 10);
+            return rounded_ratio + '%';
+        },
+        maskNumber(number) {
+            let numStr = number.toString();
+            let parts = numStr.split('.');
+            let integerPart = parts[0];
+            let decimalPart = parts.length > 1 ? '.' + parts[1] : '';        
+            let maskedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');        
+            return maskedInteger + decimalPart;
+        },
+        async get_signups() {
+            try {
+                let counter_url = new URL('https://counter.greenpeace.org/signups');
+                counter_url.searchParams.set('id', this.id);
+                const response = await fetch(counter_url.href);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                this.id = data.id;
+                this.counter = data.unique_count;
+            } catch (error) {
+                console.error('The Greenpeace counter is not working. Error=' + error);
+                gtag('event', 'exception', {
+                    'description': 'The Greenpeace counter is not working. Error=' + error,
+                    'fatal': false
+                });
+            }
+        }
+    }">
+
+        <label for="altri">
+        <span x-text="maskNumber(counter + correction)"></span> firmas. ¡Ayúdanos a conseguir <span x-text="maskNumber(goal);"></span>!</label>
+        <progress id="altri" x-bind:value="counter + correction" x-bind:max="goal" x-text="percentage"> 0% </progress>
+
+    </div>
 
                     </section>
                 
