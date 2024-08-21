@@ -258,21 +258,21 @@
     <input type="hidden" name="last_abtest_variant" id="last_abtest_variant" value=""/>
     <input type="hidden" name="hs_language" id="hs_language" x-model="values.hs_language" value="{{ lang }}"/>
     <div class="form-group">
-        <label for="first_name" class="d-none">{{ form.label_first_name }}
+        <label for="first_name" class="sr-only">{{ form.label_first_name }}
             <sup title="{{ form.required }}">*</sup>
         </label>
         <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="{{ form.label_first_name }} *" x-model="values.first_name" x-on:input="required('first_name');" x-on:click="$dispatch('form:click');"/>
         <div class="error-message" x-text="errors.first_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <div class="form-group">
-        <label for="last_name" class="d-none">{{ form.label_last_name }}
+        <label for="last_name" class="sr-only">{{ form.label_last_name }}
             <sup title="{{ form.required }}">*</sup>
         </label>
         <input type="text" class="form-control" id="last_name" name="last_name" required="required" maxlength="40" autocomplete="family-name" placeholder="{{ form.label_last_name }} *" x-model="values.last_name" x-on:input="required('last_name')" x-on:click="$dispatch('form:click');"/>
         <div class="error-message" x-text="errors.last_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <div class="form-group">
-        <label for="email" class="d-none">{{ form.label_email }}
+        <label for="email" class="sr-only">{{ form.label_email }}
             <sup title="{{ form.required }}">*</sup>
         </label>
         <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="{{ form.label_email }} *" x-model="values.email" x-on:input="is_required_email('email');" x-on:change="is_new_email()" x-on:click="$dispatch('form:click');"/>
@@ -280,7 +280,7 @@
     </div>
     <!--<div class="form-group"> <label for="id_number" class="d-none">{{ form.label_id_number }} <sup title="{{ form.required }}">*</sup> <span class="sr-only">{{ form.example_id_number }}</span></label> <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="{{ form.label_id_number }}" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" /> <div class="error-message" x-text="errors.id_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div> </div> -->
     <div class="form-group">
-        <label for="phone_number" class="d-none">{{ form.label_phone_number }}
+        <label for="phone_number" class="sr-only">{{ form.label_phone_number }}
             <sup title="{{ form.required }}">*</sup>
             <span class="sr-only">{{ form.example_phone_number }}</span></label>
         <input type="tel" class="form-control" id="phone_number" name="phone_number" maxlength="15" autocomplete="tel-national" required="required" placeholder="{{ form.label_phone_number }} *" x-model="values.phone_number" x-on:input="is_required_phone('phone_number')" x-on:click="$dispatch('form:click');"/>
