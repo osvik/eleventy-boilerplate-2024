@@ -51,6 +51,8 @@
                 {% block content2 %}
                     <section class="content2">
                         {{ content_2 | safe }}
+                        {% import "counter-greenpeace.njk" as counter %}
+                        {{ counter.bar(id='altri', correction=0, goal=500000) }}
                     </section>
                 {% endblock %}
 

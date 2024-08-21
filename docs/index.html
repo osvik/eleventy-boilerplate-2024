@@ -532,6 +532,39 @@
                     <section class="content2">
                         <h2>Aside</h2> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+                        
+                        
+<div class="counter-greenpeace" x-init="get_signups();" x-data="{
+    id: 'altri',
+    correction: 0,
+    counter: 0,
+    goal: 500000,
+    async get_signups() {
+        try {
+            let counter_url = new URL('https://counter.greenpeace.org/signups');
+            counter_url.searchParams.set('id', this.id);
+            const response = await fetch(counter_url.href);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            this.id = data.id;
+            this.counter = data.unique_count;
+        } catch (error) {
+            console.error('The Greenpeace counter is not working. Error=' + error);
+            gtag('event', 'exception', {
+                'description': 'The Greenpeace counter is not working. Error=' + error,
+                'fatal': false
+            });
+        }
+    }
+}">
+<p>Counter id: <span x-text="id"></span></p>
+<p>Correction: <span x-text="correction"></span></p>
+<p>Counter value: <span x-text="counter + correction"></span></p>
+<p>Counter goal: <span x-text="goal"></span></p>
+</div>
+
                     </section>
                 
 
