@@ -1,4 +1,4 @@
-<nav x-data="{ openMobile : false }" class="topmenu">
+<nav aria-label="{{ top_menu_name }}" x-data="{ openMobile : false }" class="topmenu">
     <ul class="menu" x-bind:class="openMobile ? 'active' : ''">
         <li class="logo">
             <a href="./"><img alt= "{{ logo_alt_text }}" src="{{ site.assets}}/img/icons/greenpeace-logo-blanco.svg" width="184" height="29"></a>

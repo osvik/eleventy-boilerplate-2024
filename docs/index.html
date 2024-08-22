@@ -166,7 +166,7 @@
         <body x-data="{ showModal: false, user: {} }">
 
             
-                <nav x-data="{ openMobile : false }" class="topmenu">
+                <nav aria-label="Menú principal" x-data="{ openMobile : false }" class="topmenu">
     <ul class="menu" x-bind:class="openMobile ? 'active' : ''">
         <li class="logo">
             <a href="./"><img alt= "Greenpeace" src="https://osvik.github.io/eleventy-boilerplate-2024/assets/img/icons/greenpeace-logo-blanco.svg" width="184" height="29"></a>
@@ -692,7 +692,7 @@
             <img src="https://osvik.github.io/eleventy-boilerplate-2024/assets/img/icons/greenpeace-logo-blanco.svg" style="height: 22px;" width="184" height="29" alt="Greenpeace" loading="lazy"/>
         </a>
     </div>
-    <nav>
+    <nav aria-label="Menú pié de página">
         <ul class="footer-links">
             <li>
                 <a href="https://es.greenpeace.org/">© Greenpeace 2024</a>

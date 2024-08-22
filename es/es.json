@@ -39,6 +39,7 @@
             "url": "https://es.greenpeace.org/es/noticias/"
         }
     ],
+    "top_menu_name":"Menú principal",
     "mobile_menu": "Menu",
     "form": {
         "label_first_name": "Nombre",
@@ -72,6 +73,7 @@
         "label_contact": "Contacto",
         "url_contact": "https://es.greenpeace.org/es/quienes-somos/contacto/"
     },
+    "footer_menu_name": "Menú pié de página",
     "cookies": {
         "first_dialog": {
             "header": "Tu privacidad nos importa",
