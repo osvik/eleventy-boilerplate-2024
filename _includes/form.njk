@@ -1,4 +1,4 @@
-<form id="signup" class="form" novalidate="novalidate" x-on:submit.prevent="" x-init="populate_utms(); autofill(); get_info();" x-data="{
+<form id="signup" class="form" novalidate="novalidate" x-on:submit.prevent="show_errors = true; validate(); is_valid() && submit_form()" x-init="populate_utms(); autofill(); get_info();" x-data="{
                 values : {
                     utm_medium: '',
                     utm_source: '',
@@ -323,7 +323,7 @@
         </label>
     </div>
     <div class="buttoncontainer">
-        <button type="submit" class="colored-button" x-on:click="show_errors = true; validate(); is_valid() && submit_form()">
+        <button type="submit" class="colored-button">
             {{ form.send_button }}
             »
         </button>
