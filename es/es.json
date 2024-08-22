@@ -65,6 +65,7 @@
         "donate": "Hazte socio/a",
         "skip": "Saltar"
     },
+    "greenpeace_counter_id": "test_es",
     "footer": {
         "label_privacy_link": "Política de privacidad y cookies",
         "url_privacy_link": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",

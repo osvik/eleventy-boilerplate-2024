@@ -304,6 +304,9 @@
                         is_hubsppot_contact: this.values.is_contact === true ? true : null
                     };
                     multipage.storeData(getDataInForm);
+                    
+                         this.increase_counter();
+                    
                 },
                 async is_new_email(){
                     if ( this.errors.email ==='' ){
@@ -436,7 +439,6 @@
                             this.values.is_contact = data.is_contact;
                             this.values.lifecycle = data.lifecycle;
                             this.values.opt_out = data.opt_out;
-                        
                         } catch (error) {
                             console.error('Info email server not working 2. Error=' + error);
                             gtag('event', 'exception', {
@@ -448,7 +450,6 @@
                 },
                 async get_info(){
                     try {
-
                         const response = await fetch('https://apis.greenpeace.es/info/');
                         if (!response.ok) {
                             throw new Error(`HTTP error! status: ${response.status}`);
@@ -456,10 +457,31 @@
                         const data = await response.json();
                         this.values.ip = data.IP;
                         this.values.uagent = data.UA;
-                    
                     } catch (error) {
                         console.error('Get info error. Error=' + error);
+                        gtag('event', 'exception', {
+                            'description': 'Get info error. Error=' + error,
+                            'fatal': false
+                        });
                     }
+                },
+                async increase_counter(){
+                    try {
+                        const hashed_email = sha256(this.values.email.trim().toLowerCase());
+                        let counter_url = new URL('https://counter.greenpeace.org/count_pixel');
+                        counter_url.searchParams.set('id', 'test_es');
+                        counter_url.searchParams.set('email_hash', hashed_email);
+                        const response = await fetch(counter_url, {
+                            method: 'POST',
+                        });
+                    } catch (error) {
+                        console.error('Counter submit error. Error=' + error);
+                        gtag('event', 'exception', {
+                            'description': 'Counter submit error. Error=' + error,
+                            'fatal': false
+                        });
+                    }
+
                 }
             }" x-model="values", x-modelable="user">
     <input type="hidden" name="utm_medium" id="utm_medium" x-model="values.utm_medium"/>
@@ -565,10 +587,10 @@
 
     </style>
     <div class="counter-greenpeace" x-init="get_signups();" x-data="{
-        id: 'altri',
+        id: 'test_es',
         correction: 0,
         counter: 0,
-        goal: 500000,
+        goal: 25,
         percentage(){
             const ratio = (this.counter + this.correction) / this.goal * 100;
             const rounded_ratio = parseInt(ratio, 10);
@@ -603,8 +625,8 @@
         }
     }">
 
-        <label for="altri"><span x-text="maskNumber(counter + correction)"></span> firmas. ¡Ayúdanos a conseguir <span x-text="maskNumber(goal);"></span>!</label>
-        <progress id="altri" x-bind:value="counter + correction" x-bind:max="goal" x-text="percentage"> 0% </progress>
+        <label for="test_es"><span x-text="maskNumber(counter + correction)"></span> firmas. ¡Ayúdanos a conseguir <span x-text="maskNumber(goal);"></span>!</label>
+        <progress id="test_es" x-bind:value="counter + correction" x-bind:max="goal" x-text="percentage"> 0% </progress>
 
     </div>
 
