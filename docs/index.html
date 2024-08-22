@@ -213,7 +213,7 @@
                         <h2>Content</h2> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 
-                        <form id="signup" class="form" novalidate="novalidate" x-on:submit.prevent="show_errors = true; validate(); is_valid() && submit_form();" x-init="populate_utms(); autofill(); get_info();" x-data="{
+                        <form id="signup" aria-label="Formulário para firma" class="form" novalidate="novalidate" x-on:submit.prevent="show_errors = true; validate(); is_valid() && submit_form();" x-init="populate_utms(); autofill(); get_info();" x-data="{
                 values : {
                     utm_medium: '',
                     utm_source: '',
@@ -586,7 +586,7 @@
         }
 
     </style>
-    <div class="counter-greenpeace" x-init="get_signups();" x-data="{
+    <div class="counter-greenpeace" aria-label="Contador de firmas" x-init="get_signups();" x-data="{
         id: 'test_es',
         correction: 0,
         counter: 0,
@@ -739,7 +739,7 @@
             <!-- Modal cookies -->
 <div class="modal" x-cloak x-show="showModal" :class="{ 'modal-visible-overflow': showModal }" x-bind:aria-hidden="not(showModal)">
 
-    <div class="modal-inside" x-show="showModal" x-bind:aria-hidden="not(showModal)" x-data="{ 
+    <div class="modal-inside" aria-label="Preferencias de cookies" x-show="showModal" x-bind:aria-hidden="not(showModal)" x-data="{ 
                 modalDialog: 1,
                 init(){
                     cookieTrackingManager.read();

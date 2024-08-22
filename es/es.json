@@ -42,6 +42,7 @@
     "top_menu_name":"Menú principal",
     "mobile_menu": "Menu",
     "form": {
+        "aria_label": "Formulário para firma",
         "label_first_name": "Nombre",
         "label_last_name": "Apellidos",
         "label_email": "Email",
@@ -68,13 +69,14 @@
     },
     "greenpeace_counter_id": "test_es",
     "footer": {
+        "aria_label": "Menú pié de página",
         "label_privacy_link": "Política de privacidad y cookies",
         "url_privacy_link": "https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/",
         "label_contact": "Contacto",
         "url_contact": "https://es.greenpeace.org/es/quienes-somos/contacto/"
     },
-    "footer_menu_name": "Menú pié de página",
     "cookies": {
+        "aria_label" : "Preferencias de cookies",
         "first_dialog": {
             "header": "Tu privacidad nos importa",
             "line_1": "En Greenpeace utilizamos cookies propias y de terceros para mejorar y personalizar tu experiencia en nuestra web, así como con fines analíticos, para ofrecer funciones de redes sociales y mostrarte publicidad personalizada en base a un perfil elaborado a partir de tus hábitos de navegación. Para más información puedes consultar nuestra política de cookies <a target=\"_blank\" href=\"https://es.greenpeace.org/es/politica-de-privacidad-y-cookies/?tracking=deny_all#cookies\" x-on:click=\"checkPolicy(); $dipatch('cookies:checkpolicy')\" aria-label=\"política de privacidad\">AQUÍ</a>.",
