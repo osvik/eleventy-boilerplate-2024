@@ -499,21 +499,21 @@
             <sup title="Campo obligatório">*</sup>
         </label>
         <input type="text" class="form-control" id="first_name" name="first_name" required="required" maxlength="40" autocomplete="given-name" placeholder="Nombre *" x-model="values.first_name" x-on:input="required('first_name');" x-on:click="$dispatch('form:click');"/>
-        <div class="error-message" x-text="errors.first_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+        <div class="error-message" aria-label="Error en el formulário" x-text="errors.first_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <div class="form-group">
         <label for="last_name" class="sr-only">Apellidos
             <sup title="Campo obligatório">*</sup>
         </label>
         <input type="text" class="form-control" id="last_name" name="last_name" required="required" maxlength="40" autocomplete="family-name" placeholder="Apellidos *" x-model="values.last_name" x-on:input="required('last_name')" x-on:click="$dispatch('form:click');"/>
-        <div class="error-message" x-text="errors.last_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+        <div class="error-message" aria-label="Error en el formulário" x-text="errors.last_name" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <div class="form-group">
         <label for="email" class="sr-only">Email
             <sup title="Campo obligatório">*</sup>
         </label>
         <input type="email" class="form-control" id="email" name="email" required="required" maxlength="50" autocomplete="email" placeholder="Email *" x-model="values.email" x-on:input="is_required_email('email');" x-on:change="is_new_email()" x-on:click="$dispatch('form:click');"/>
-        <div class="error-message" x-text="errors.email" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+        <div class="error-message" aria-label="Error en el formulário" x-text="errors.email" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <!--<div class="form-group"> <label for="id_number" class="d-none">DNI o NIE <sup title="Campo obligatório">*</sup> <span class="sr-only">Ej 1234567x o y1234567x</span></label> <input type="text" class="form-control" id="id_number" name="id_number" required="required" maxlength="12" placeholder="DNI o NIE" x-model="values.id_number" x-on:input="is_required_id_number('id_number')" x-on:click="$dispatch('form:click');" /> <div class="error-message" x-text="errors.id_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div> </div> -->
     <div class="form-group">
@@ -521,7 +521,7 @@
             <sup title="Campo obligatório">*</sup>
             <span class="sr-only">Ej. 623456789</span></label>
         <input type="tel" class="form-control" id="phone_number" name="phone_number" maxlength="15" autocomplete="tel-national" required="required" placeholder="Teléfono *" x-model="values.phone_number" x-on:input="is_required_phone('phone_number')" x-on:click="$dispatch('form:click');"/>
-        <div class="error-message" x-text="errors.phone_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+        <div class="error-message" aria-label="Error en el formulário" x-text="errors.phone_number" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
     </div>
     <div class="privacynotice">
         
@@ -536,7 +536,7 @@
             <span id="iaccept">Acepto la política de privacidad
                 <sup title="Campo obligatório">*</sup>
             </span>
-            <div class="error-message" x-text="errors.privacy" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
+            <div class="error-message" aria-label="Error en el formulário" x-text="errors.privacy" x-show="show_errors" x-bind:aria-hidden="not(show_errors)"></div>
         </label>
     </div>
     <div class="buttoncontainer">

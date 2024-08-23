@@ -57,6 +57,7 @@
         "label_accept_privacy": "Acepto la política de privacidad",
         "example_id_number": "Ej 1234567x o y1234567x",
         "example_phone_number": "Ej. 623456789",
+        "aria_label_error": "Error en el formulário",
         "error_required": "Campo obligatorio",
         "error_email": "Un email válido por favor, ej. nombre@dominio.tld",
         "error_phone": "Tu número de teléfono español por favor",
