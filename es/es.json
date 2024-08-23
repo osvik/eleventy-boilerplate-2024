@@ -55,6 +55,11 @@
         "donate": "Hazte socio/a",
         "skip": "Saltar"
     },
+    "thank_you": {
+        "aria_label_thank_you": "Pantalla de gracias",
+        "aria_label_share": "Pantalla de compartir en redes",
+        "aria_label_donate": "Pantalla de donar"
+    },
     "footer": {
         "aria_label": "Menú pié de página",
         "label_privacy_link": "Política de privacidad y cookies",

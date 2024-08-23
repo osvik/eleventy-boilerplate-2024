@@ -637,7 +637,7 @@
 
             <div id="thankspages" x-data="{ screen: 'thankyoupage'}" style="display:none;" aria-hidden="true">
 
-    <section id="thankyoupage" x-show="screen === 'thankyoupage'" x-bind:aria-hidden="not(screen === 'thankyoupage')" x-transition.opacity.duration.200ms>
+    <section id="thankyoupage" aria-label="Pantalla de gracias" x-show="screen === 'thankyoupage'" x-bind:aria-hidden="not(screen === 'thankyoupage')" x-transition.opacity.duration.200ms>
         <h2>Disfruta tu guía, <span x-text="user.first_name"></span></h2> <p><span style="font-size: larger;">Ya te hemos enviado la guía a <span x-text="user.email"></span>.</span><br /><br /><span style="font-size: smaller;">Revisa tus bandejas de entrada para empezar a consumir mejor. Si no encuentras la guía o has tenido algún problema para descargarla, escríbenos a <a href="mailto:contacto.es@greenpeace.org" target="_blank" rel="noopener">contacto.es@greenpeace.org</a></span></p> <p>¿Quieres compartirla con tus contactos? Así les ayudarás a que ellos también puedan consumir mejor.</p>
 
         <div class="rowbuttons">
@@ -646,7 +646,7 @@
         <div>
     </section>
 
-    <section id="sharepage" x-show="screen === 'sharepage'" x-bind:aria-hidden="not(screen === 'sharepage')" x-transition.opacity.duration.200ms>
+    <section id="sharepage" aria-label="Pantalla de compartir en redes" x-show="screen === 'sharepage'" x-bind:aria-hidden="not(screen === 'sharepage')" x-transition.opacity.duration.200ms>
         <h2>Comparte esta guía</h2> <p>Ayuda a otra gente a consumir mejor</p>
 
         <div class="thankyoubuttons">
@@ -675,7 +675,7 @@
         <button type="button" class="colored-button" x-on:click="screen = 'givepage'; $dispatch('thankyou:buttons', { button: 'skip_to_donations' });" >Saltar »</button>
     </section>
 
-    <section id="givepage" x-show="screen === 'givepage'" x-bind:aria-hidden="not(screen === 'givepage')" x-transition.opacity.duration.200ms>
+    <section id="givepage" aria-label="Pantalla de donar" x-show="screen === 'givepage'" x-bind:aria-hidden="not(screen === 'givepage')" x-transition.opacity.duration.200ms>
         <h2>Apoya la campaña</h2> <p>En Greenpeace trabajamos para proteger nuestros bosques y defender su biodiversidad. Únete ahora y súmate a la lucha por un planeta sano y en paz.</p>
 
         <div style="margin: 25px 0;">
