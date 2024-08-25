@@ -1,3 +1,6 @@
+// cd assets/js/   
+// npx eslint form.js   
+
 import globals from "globals";
 import pluginJs from "@eslint/js";
 
