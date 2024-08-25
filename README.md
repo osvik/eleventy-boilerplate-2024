@@ -6,35 +6,34 @@ This is a starter project to develop custom web pages for Greenpeace Spain.
 
 Clone the git repo:
 
-```bash
+```sh
 git clone https://github.com/osvik/eleventy-boilerplate-2024.git
 ```
 
 Install the dependencies:
 
-```bash
+```sh
 npm install
 ```
 
-Run a local server in the port 8080:
+Run a [local server in the port 8080](http://localhost:8080):
 
-```bash
+```sh
 npm run server
 ```
-
 
 ## Features
 
 ### User
 
-#### Is
+#### This repo
 
-* Multilingual
-* Highly acessible
-* Responsive and mobile first
-* High performance
+* Can be multilingual
+* The page has good acessible
+* The page is responsive and mobile first
+* The page has good performance
 
-#### Forms
+#### Greenpeace forms
 
 * Greenpeace downloads and petiton forms
 * Greenpeace's petition counter
@@ -42,11 +41,11 @@ npm run server
 
 #### Other
 
-* Page content is user customizable with hbspt_token
-* Simple standard navigation menu and footer
 * Cookie management compatible with es.greenpeace.org
+* Page content is user customizable with `hbspt_token`
+* Example standard navigation menu and footer
 * Open graph to easily share in social media
-* Social media share links
+* Generates social media share links
 
 ### Analytics
 
@@ -86,19 +85,20 @@ Build the site into the docs folder, so it works in Github pages.
 npm run build:github
 ```
 
-### Build for production
+### How to build for production
 
-Build the site with the production urls, also in the docs folder.
+1. Ensure that [_data/site.js](_data/site.js) is properly configured.
 
+2. Build the site with the production urls, also in the docs folder by running this command:
 ```bash
 npm run build:prod
 ```
 
-Make sure you deploy the assets folder
+3. Deploy the assets folder to be accessed publically.
 
 ## Translate
 
-Practically all language text is in the folder json file, like for example `es.json`.
+Practically all language texts are in the folder json file, like for example `es.json`. For more than one language duplicate `es.json`.
 
 ## Notes
 
