@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 
@@ -138,6 +139,7 @@ const str_replace = function (e, t, n) {
     var a = (s = [].concat(s)).length;
     while (j = 0, a--) {
         if (s[a]) {
+            // eslint-disable-next-line no-empty
             while (s[a] = s[a].split(r[j]).join(o ? i[j] || "" : i[0]), ++j in r) { }
         }
     }
@@ -227,9 +229,7 @@ async function sendToHubspot(formValues) {
     const first_name = formValues.first_name.trim();
     const last_name = formValues.last_name.trim();
     const email = formValues.email.trim();
-    // eslint-disable-next-line no-useless-escape
     const id_number = formValues.id_number.replace(/[\.\s-,_\|#]/g, '').toUpperCase();
-    // eslint-disable-next-line no-useless-escape
     const phone = formValues.phone_number.replace(/[\.\s-,_\|#]/g, '');
 
     const postURL = "https://api.hsforms.com/submissions/v3/integration/submit/5361482/" + HUBSPOT_FORM_ID;
