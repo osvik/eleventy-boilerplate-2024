@@ -1,7 +1,10 @@
+/* jshint esversion:6 */
+
 const Abrantes = Object.create(null);
 
 Abrantes.testId = undefined;
 Abrantes.variant = undefined;
+Abrantes.version = "0.19+";
 
 /**
  * Assigns a variant to a user
@@ -121,12 +124,14 @@ Abrantes.renderVariant = function (variant = this.variant) {
  * Stores the test id (object name) and variant in localStorage
  */
 Abrantes.persist = function (context) {
-    if (context === "user") {
+    if (context === "user" || context=="local") {
         localStorage.setItem(this.testId, this.variant);
     } else if (context === "session") {
         sessionStorage.setItem(this.testId, this.variant);
+    } else if ( context === "cookie" ) {
+        document.cookie = `${this.testId}=${this.variant}; expires=${new Date(Date.now() + 86400000 * this.settings.cookie.expires).toUTCString()}; path=/; SameSite=Strict;`;
     } else {
-        throw ("You must use either 'user' or 'session'");
+        throw ("You must use either 'user', 'session' or 'cookie' with persist");
     }
 };
 
@@ -143,6 +148,10 @@ Abrantes.readPersistent = function () {
     if (typeof (userData) === "string" || typeof (userData) === "number") {
         return Number(userData);
     }
+    const cookieData = document.cookie.split('; ').find(row => row.startsWith(this.testId + '='));
+    if (typeof (cookieData) === "string") {
+        return Number(cookieData.split('=')[1]);
+    }
     return undefined;
 };
 
@@ -153,6 +162,9 @@ Abrantes.settings = {
 
     crossSiteLink: {
         triggerEvent: "DOMContentLoaded"
+    },
+    cookie: {
+        expires: 7
     }
 
 };
@@ -169,8 +181,15 @@ Abrantes.variants = [
  * @returns number
  */
 Abrantes.randomVar = function () {
-    const numberVariants = this.variants.length;
-    this.variant = Math.floor(Math.random() * (numberVariants));
+    const numberOfVariants = this.variants.length;
+    if (window.crypto && window.crypto.getRandomValues) {
+        const values = new Uint32Array(1);
+        window.crypto.getRandomValues(values);
+        this.variant = values[0] % (numberOfVariants);
+    }
+    else {
+        this.variant = Math.floor(Math.random() * (numberOfVariants));
+    }
     return this.variant;
 };
 
@@ -276,6 +295,8 @@ Abrantes.track = function () {
     Object.assign(Abrantes.settings, settings);
 
 }
+
+/* eslint-disable no-undef */
 
 {
 
